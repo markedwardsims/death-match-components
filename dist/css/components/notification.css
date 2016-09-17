@@ -1,0 +1,35 @@
+.notification-list {
+  width: 300px;
+  position: absolute;
+  right: 50px; }
+
+.notification-list__item {
+  color: white;
+  list-style-type: none;
+  margin: 0 0 5px 0;
+  padding: 10px;
+  border: 1px solid;
+  text-align: left; }
+
+.notification-list__item--success {
+  background-color: #008000; }
+
+.notification-list__item--warning {
+  background-color: #f8e71c; }
+
+.notification-list__item--error {
+  background-color: #b8182b; }
+
+.notification-list__item--enter {
+  opacity: 0.01; }
+
+.notification-list__item--enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in-out; }
+
+.notification-list__item--leave {
+  opacity: 1; }
+
+.notification-list__item--leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in-out; }

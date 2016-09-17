@@ -1,0 +1,29 @@
+{
+  "name": "deathmatch-components",
+  "version": "1.0.0",
+  "description": "A library of component to build Deathmatch apps with",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markedwardsims/death-match-components.git"
+  },
+  "author": "Mark Edward Sims",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/markedwardsims/death-match-components/issues"
+  },
+  "homepage": "https://github.com/markedwardsims/death-match-components#readme",
+  "devDependencies": {
+    "event-stream": "^3.3.4",
+    "fs": "0.0.2",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^3.1.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-cli": "^1.2.2",
+    "gulp-insert": "^0.5.0",
+    "gulp-sass": "^2.3.2"
+  }
+}
