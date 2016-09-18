@@ -3,18 +3,17 @@ const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const insert = require('gulp-insert');
 const es = require('event-stream');
-const fs = require('fs');
-
+const rename = require('gulp-rename');
+const gulpif = require('gulp-if');
 
 function scss(files, out, options) {
 
-	options = options || {};
-    
+    options = options || {};
+
     var streams = [];
     var prepends = options.prepends || [];
 
     function run(file) {
-
         return gulp.src(file)
             .pipe(insert.transform(function(contents, file) {
                 return prepends.join('') + contents;
@@ -23,6 +22,9 @@ function scss(files, out, options) {
             .pipe(autoprefixer({
                 browsers: ['last 3 versions']
             }))
+            .pipe(gulpif(function(file) {
+                return (options.name);
+            }, rename(options.name + '.css')))
             .pipe(gulp.dest(out));
     }
 
@@ -42,10 +44,16 @@ gulp.task('sass:components', function() {
     });
 });
 
-gulp.task('sass:all', function() {
-    scss(['./scss/styles.scss'], 'dist/css');
+gulp.task('sass:common', function() {
+    scss(['./scss/common/index.scss'], 'dist/css', {
+        name: 'common',
+        prepends: [
+            '@import "../variables";',
+            '@import "../mixins/index";'
+        ]
+    });
 });
 
-gulp.task('sass:watch', function() {
-    gulp.watch(scssFiles, ['sass']);
+gulp.task('sass:all', function() {
+    scss(['./scss/styles.scss'], 'dist/css');
 });
