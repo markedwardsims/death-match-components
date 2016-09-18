@@ -5,6 +5,7 @@ const insert = require('gulp-insert');
 const es = require('event-stream');
 const rename = require('gulp-rename');
 const gulpif = require('gulp-if');
+const cleanCSS = require('gulp-clean-css');
 
 function scss(files, out, options) {
 
@@ -35,7 +36,7 @@ function scss(files, out, options) {
     return es.merge(streams);
 }
 
-gulp.task('sass:components', function() {
+gulp.task('scss:components', function() {
     scss(['./scss/components/**/*.scss'], 'dist/css/components', {
         prepends: [
             '@import "../variables";',
@@ -44,7 +45,7 @@ gulp.task('sass:components', function() {
     });
 });
 
-gulp.task('sass:common', function() {
+gulp.task('scss:common', function() {
     scss(['./scss/common/index.scss'], 'dist/css', {
         name: 'common',
         prepends: [
@@ -54,6 +55,21 @@ gulp.task('sass:common', function() {
     });
 });
 
-gulp.task('sass:all', function() {
+gulp.task('scss:all', function() {
     scss(['./scss/styles.scss'], 'dist/css');
+});
+
+gulp.task('scss:build', [
+    'scss:components',
+    'scss:common',
+    'scss:all'
+]);
+
+gulp.task('scss:build:minify', ['scss:build'], function() {
+    return gulp.src('dist/**/*.css')
+        .pipe(cleanCSS())
+        .pipe(rename({
+            suffix: '.min'
+        }))
+        .pipe(gulp.dest('dist'));
 });
