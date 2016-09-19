@@ -4,7 +4,9 @@ const scsslint = require('gulp-scss-lint');
  
 gulp.task('lint:scss', function() {
   return gulp.src('./scss/**/*.scss')
-    .pipe(scsslint());
+    .pipe(scsslint({
+    	'config': 'scss-lint.yml'
+    }));
 });
 
 // gulp.task('lint:js', function() {
