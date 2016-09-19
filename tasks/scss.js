@@ -6,6 +6,7 @@ const es = require('event-stream');
 const rename = require('gulp-rename');
 const gulpif = require('gulp-if');
 const cleanCSS = require('gulp-clean-css');
+const copy = require('gulp-contrib-copy');
 
 function scss(files, out, options) {
 
@@ -56,11 +57,18 @@ gulp.task('scss:base', function() {
     });
 });
 
+gulp.task('scss:variables', function() {
+    return gulp.src('./scss/_variables.scss')
+        .pipe(copy())
+        .pipe(gulp.dest('dist/scss'));
+});
+
 gulp.task('scss:all', function() {
     return scss(['./scss/styles.scss'], 'dist/css');
 });
 
 gulp.task('scss:build', [
+    'scss:variables',
     'scss:components',
     'scss:base',
     'scss:all'
