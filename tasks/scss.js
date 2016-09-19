@@ -46,8 +46,8 @@ gulp.task('scss:components', function() {
 });
 
 gulp.task('scss:common', function() {
-    scss(['./scss/common/index.scss'], 'dist/css', {
-        name: 'common',
+    scss(['./scss/common/index.scss', './scss/helpers/index.scss'], 'dist/css', {
+        name: 'base',
         prepends: [
             '@import "../variables";',
             '@import "../mixins/index";'
