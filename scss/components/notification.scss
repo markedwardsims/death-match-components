@@ -1,29 +1,29 @@
 .notification-list {
-	width: $notification-width;
-	position: absolute;
-	right: 50px;
+  position: absolute;
+  right: 50px;
+  width: $notification-width;
 }
 
 .notification-list__item {
-	color: white;
-	list-style-type: none;
-	margin: 0 0 5px 0;
-	padding: 10px;
-	border: 1px solid;
-	text-align: left;
+  border: 1px solid;
+  color: $white;
+  list-style-type: none;
+  margin: 0 0 5px;
+  padding: 10px;
+  text-align: left;
 }
 
 // notification themes
 .notification-list__item--success {
-	background-color: $green;
+  background-color: $green;
 }
 
 .notification-list__item--warning {
-	background-color: $yellow;
+  background-color: $yellow;
 }
 
 .notification-list__item--error {
-	background-color: $red;
+  background-color: $red;
 }
 
 
@@ -31,7 +31,7 @@
 $animation-time: 300ms;
 
 .notification-list__item--enter {
-  opacity: 0.01;
+  opacity: .01;
 }
 
 .notification-list__item--enter-active {
@@ -44,6 +44,6 @@ $animation-time: 300ms;
 }
 
 .notification-list__item--leave-active {
-  opacity: 0.01;
+  opacity: .01;
   transition: opacity $animation-time ease-in-out;
 }

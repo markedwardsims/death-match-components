@@ -13,9 +13,9 @@
 
 .sidebar {
   background-color: #1d2225;
-  width: 230px;
+  color: #fff;
   float: left;
-  color: #fff; }
+  width: 230px; }
   @media (max-width: 500px) {
     .sidebar {
       width: 100%; } }
@@ -24,19 +24,19 @@
   margin-bottom: 20px; }
 
 .table {
-  text-align: left;
-  border-collapse: collapse; }
+  border-collapse: collapse;
+  text-align: left; }
 
 .table__thead {
   background-color: #384248; }
 
 .table__row {
-  border-bottom: 1px solid #384248;
-  transition: background-color 0.25s ease-in-out; }
+  transition: background-color .25s ease-in-out;
+  border-bottom: 1px solid #384248; }
   .table__row:nth-child(even) {
     background-color: #282f33; }
   .table__row:hover {
-    transition: background-color 0.25s ease-in-out;
+    transition: background-color .25s ease-in-out;
     background-color: #4a575e; }
 
 .table__cell {
@@ -46,8 +46,8 @@
   text-align: right; }
 
 .title {
-  text-align: center;
   color: #f5a623;
+  text-align: center;
   text-transform: uppercase; }
 
 .title--medium {

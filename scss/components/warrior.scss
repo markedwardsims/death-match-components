@@ -2,18 +2,19 @@
 @import '../mixins/transitions';
 
 .warrior {
-    width: $warrior-image-small;
-    height: $warrior-image-small;
-    background-color: $light-grey;
-    @include background-transition;
+  @include background-transition;
+  background-color: $light-grey;
+  height: $warrior-image-small;
+  width: $warrior-image-small;
 
-    &:hover {
-        background-color: darken($light-grey, 20% );
-        @include background-transition;
-    }
+  &:hover {
+    @include background-transition;
+    background-color: darken($light-grey, 20%);
+  }
+  
 }
 
 .warrior--large {
-    width: $warrior-image-large;
-    height: $warrior-image-large;
+  height: $warrior-image-large;
+  width: $warrior-image-large;
 }

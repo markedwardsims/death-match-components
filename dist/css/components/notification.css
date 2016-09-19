@@ -1,14 +1,14 @@
 .notification-list {
-  width: 300px;
   position: absolute;
-  right: 50px; }
+  right: 50px;
+  width: 300px; }
 
 .notification-list__item {
-  color: white;
-  list-style-type: none;
-  margin: 0 0 5px 0;
-  padding: 10px;
   border: 1px solid;
+  color: #fff;
+  list-style-type: none;
+  margin: 0 0 5px;
+  padding: 10px;
   text-align: left; }
 
 .notification-list__item--success {
@@ -21,7 +21,7 @@
   background-color: #b8182b; }
 
 .notification-list__item--enter {
-  opacity: 0.01; }
+  opacity: .01; }
 
 .notification-list__item--enter-active {
   opacity: 1;
@@ -31,5 +31,5 @@
   opacity: 1; }
 
 .notification-list__item--leave-active {
-  opacity: 0.01;
+  opacity: .01;
   transition: opacity 300ms ease-in-out; }

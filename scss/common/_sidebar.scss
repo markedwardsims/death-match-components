@@ -1,15 +1,15 @@
 @import '../mixins/media-queries';
 
 .sidebar {
-    background-color: $almost-black;
-    width: $sidebar-size;
-    float: left;
-    color: $white;
+  background-color: $almost-black;
+  color: $white;
+  float: left;
+  width: $sidebar-size;
 
-    @include mobile-only { width: 100%; }
+  @include mobile-only { width: 100%; }
 
 }
 
 .sidebar__title {
-    margin-bottom: $gutter;
+  margin-bottom: $gutter;
 }
