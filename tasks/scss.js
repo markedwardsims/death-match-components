@@ -40,8 +40,7 @@ function scss(files, out, options) {
 gulp.task('scss:components', function() {
     return scss(['./scss/components/**/*.scss'], 'dist/css/components', {
         prepends: [
-            '@import "../variables";',
-            '@import "../mixins/index";'
+            '@import "../variables";'
         ]
     });
 });
@@ -51,16 +50,9 @@ gulp.task('scss:base', function() {
         name: 'base',
         prepends: [
             '@import "../variables";',
-            '@import "../mixins/index";',
             '@import "../helpers/reset";'
         ]
     });
-});
-
-gulp.task('scss:variables', function() {
-    return gulp.src('./scss/_variables.scss')
-        .pipe(copy())
-        .pipe(gulp.dest('dist/scss'));
 });
 
 gulp.task('scss:all', function() {
@@ -68,7 +60,6 @@ gulp.task('scss:all', function() {
 });
 
 gulp.task('scss:build', [
-    'scss:variables',
     'scss:components',
     'scss:base',
     'scss:all'

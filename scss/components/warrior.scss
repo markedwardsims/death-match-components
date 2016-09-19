@@ -1,3 +1,6 @@
+@import '../mixins/media-queries';
+@import '../mixins/transitions';
+
 .warrior {
     width: $warrior-image-small;
     height: $warrior-image-small;
