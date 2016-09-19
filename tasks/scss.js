@@ -37,7 +37,7 @@ function scss(files, out, options) {
 }
 
 gulp.task('scss:components', function() {
-    scss(['./scss/components/**/*.scss'], 'dist/css/components', {
+    return scss(['./scss/components/**/*.scss'], 'dist/css/components', {
         prepends: [
             '@import "../variables";',
             '@import "../mixins/index";'
@@ -45,23 +45,24 @@ gulp.task('scss:components', function() {
     });
 });
 
-gulp.task('scss:common', function() {
-    scss(['./scss/common/index.scss', './scss/helpers/index.scss'], 'dist/css', {
+gulp.task('scss:base', function() {
+    return scss(['./scss/common/index.scss'], 'dist/css', {
         name: 'base',
         prepends: [
             '@import "../variables";',
-            '@import "../mixins/index";'
+            '@import "../mixins/index";',
+            '@import "../helpers/reset";'
         ]
     });
 });
 
 gulp.task('scss:all', function() {
-    scss(['./scss/styles.scss'], 'dist/css');
+    return scss(['./scss/styles.scss'], 'dist/css');
 });
 
 gulp.task('scss:build', [
     'scss:components',
-    'scss:common',
+    'scss:base',
     'scss:all'
 ]);
 

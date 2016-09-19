@@ -6,9 +6,6 @@
 .clearfix {
   overflow: hidden; }
 
-.text-right {
-  text-align: right; }
-
 .page {
   background-color: #b8182b;
   font-family: 'Open Sans', sans-serif;
@@ -44,6 +41,9 @@
 
 .table__cell {
   padding: 10px 15px; }
+
+.text-right {
+  text-align: right; }
 
 .title {
   text-align: center;
