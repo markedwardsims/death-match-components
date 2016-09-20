@@ -42,7 +42,10 @@ function scss(files, out, options) {
 gulp.task('scss:components', function() {
     return scss(['./scss/components/**/*.scss'], 'dist/css/components', {
         prepends: [
-            '@import "../variables";'
+            '@import "../variables";',
+            '@import "../config/index";',
+            '@import "../helpers/index";',
+            '@import "../mixins/index";'
         ]
     });
 });

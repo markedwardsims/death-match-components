@@ -14,11 +14,7 @@
 .sidebar {
   background-color: #1d2225;
   color: #fff;
-  float: left;
-  width: 230px; }
-  @media (max-width: 500px) {
-    .sidebar {
-      width: 100%; } }
+  float: left; }
 
 .sidebar__title {
   margin-bottom: 20px; }

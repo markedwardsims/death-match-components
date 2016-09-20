@@ -1,6 +1,3 @@
-@import '../mixins/media-queries';
-@import '../mixins/transitions';
-
 .warrior {
   @include background-transition;
   background-color: $light-grey;
