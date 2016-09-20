@@ -1,5 +1,8 @@
 @import 'variables';
 
-@import 'helpers/reset';
+@import 'config/index';
+@import 'helpers/index';
+@import 'mixins/index';
+
 @import 'common/index';
 @import 'components/index';

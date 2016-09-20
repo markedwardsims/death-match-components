@@ -15,6 +15,8 @@ function scss(files, out, options) {
     var streams = [];
     var prepends = options.prepends || [];
 
+    var prepend = true;
+
     function run(file) {
         return gulp.src(file)
             .pipe(insert.transform(function(contents, file) {
@@ -45,23 +47,25 @@ gulp.task('scss:components', function() {
     });
 });
 
-gulp.task('scss:base', function() {
+gulp.task('scss:common', function() {
     return scss(['./scss/common/index.scss'], 'dist/css', {
-        name: 'base',
+        name: 'common',
         prepends: [
             '@import "../variables";',
-            '@import "../helpers/reset";'
+            '@import "../config/index";',
+            '@import "../helpers/index";',
+            '@import "../mixins/index";'
         ]
     });
 });
 
 gulp.task('scss:all', function() {
-    return scss(['./scss/styles.scss'], 'dist/css');
+    return scss(['./scss/deathmatch.scss'], 'dist/css');
 });
 
 gulp.task('scss:build', [
     'scss:components',
-    'scss:base',
+    'scss:common',
     'scss:all'
 ]);
 
