@@ -1,1 +1,1 @@
-*{box-sizing:border-box;margin:0;padding:0}.clearfix{overflow:hidden}.warriors{padding:5px 0 20px 20px}.warriors__list-item{float:left;list-style-type:none;margin-bottom:20px;margin-right:20px}
+.no-gutter>[class*=col-]{padding-left:0;padding-right:0}*{box-sizing:border-box;margin:0;padding:0}.clearfix{overflow:hidden}.warriors{padding:5px 0 20px 20px}.warriors__list-item{float:left;list-style-type:none;margin-bottom:20px;margin-right:20px}
