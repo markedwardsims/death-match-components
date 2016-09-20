@@ -10,18 +10,25 @@
 .clearfix {
   overflow: hidden; }
 
-.notification-list {
-  position: absolute;
-  right: 50px;
-  width: 300px; }
+@media (min-width: 1048px) {
+  .notification-list {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    width: 300px;
+    z-index: 1; } }
 
 .notification-list__item {
   border: 1px solid;
   color: #fff;
   list-style-type: none;
-  margin: 0 0 5px;
   padding: 10px;
   text-align: left; }
+  @media (min-width: 1048px) {
+    .notification-list__item {
+      margin: 0 0 5px; } }
+  .notification-list__item:hover {
+    cursor: pointer; }
 
 .notification-list__item--success {
   background-color: #008000; }

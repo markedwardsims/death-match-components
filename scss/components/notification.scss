@@ -1,16 +1,27 @@
 .notification-list {
-  position: absolute;
-  right: 50px;
-  width: $notification-width;
+  @include media-breakpoint-up('lg') {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    width: $notification-width;
+    z-index: 1;  
+  }
 }
 
 .notification-list__item {
   border: 1px solid;
   color: $white;
   list-style-type: none;
-  margin: 0 0 5px;
   padding: 10px;
   text-align: left;
+
+  @include media-breakpoint-up('lg') {
+    margin: 0 0 5px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 // notification themes
