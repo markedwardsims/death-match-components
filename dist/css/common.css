@@ -21,7 +21,17 @@
   float: left; }
 
 .sidebar__title {
-  margin-bottom: 20px; }
+  margin-bottom: 1rem; }
+
+.sidebar__section {
+  padding: 1rem 1rem 0; }
+
+.sidebar__section--full-width {
+  padding-left: 0;
+  padding-right: 0; }
+
+.sidebar__section:last-child {
+  padding-bottom: 1rem; }
 
 .table {
   border-collapse: collapse;
