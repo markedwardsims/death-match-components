@@ -2,11 +2,11 @@
   background-color: $medium-dark-grey;
   color: $white;
   font-size: 18px;
-  height: $warrior-image-large + 30px + ($gutter-width * 2);
+  height: $warrior-image-large + 30px + ($gutter-size * 2);
   margin-left: auto;
   margin-right: auto;
-  padding: $gutter-width $gutter-width ($gutter-width + 30px);
-  width: $warrior-image-large + ($gutter-width * 2);
+  padding: $gutter-size $gutter-size ($gutter-size + 30px);
+  width: $warrior-image-large + ($gutter-size * 2);
 }
 
 .warrior-detail__caption {

@@ -25,7 +25,7 @@ $grid-columns: 12;
 
 /// Padding between columns. Gets divided in half for the left and right.
 /// @type {Number}
-$grid-gutter-width: $gutter-width;
+$grid-gutter-width: 2rem;
 
 /// Container sizes
 /// Define the maximum width of `.container` for different screen sizes.
