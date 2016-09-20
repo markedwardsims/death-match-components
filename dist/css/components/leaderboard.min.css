@@ -1,1 +1,1 @@
-.no-gutter>[class*=col-]{padding-left:0;padding-right:0}*{box-sizing:border-box;margin:0;padding:0}.clearfix{overflow:hidden}.leaderboard{padding-bottom:50px}.leaderboard__table{width:100%}
+.row--no-gutter>[class*=col-]{padding-left:0;padding-right:0}*{box-sizing:border-box;margin:0;padding:0}.clearfix{overflow:hidden}.leaderboard{padding-bottom:50px}.leaderboard__table{width:100%}
