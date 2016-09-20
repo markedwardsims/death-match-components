@@ -1,6 +1,6 @@
 .notification-list {
   @include media-breakpoint-up('lg') {
-    position: absolute;
+    position: fixed;
     right: 1rem;
     top: 1rem;
     width: $notification-width;
