@@ -4,7 +4,7 @@ gulp.task('build', [
 	'clean:dist',
 	'lint:scss',
 	'lint:js',
-	'test',
+	// 'test',
 	'scss:build:minify',
 	'js:build:minify'
 ]);
