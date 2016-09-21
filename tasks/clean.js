@@ -11,7 +11,7 @@ gulp.task('clean:dist:css', function () {
         .pipe(clean());
 });
 
-gulp.task('clean:dist:scss', function () {
-    return gulp.src('dist/scss')
+gulp.task('clean:dist:js', function () {
+    return gulp.src('dist/js')
         .pipe(clean());
 });

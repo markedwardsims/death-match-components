@@ -3,5 +3,8 @@ const gulp = require('gulp');
 gulp.task('build', [
 	'clean:dist',
 	'lint:scss',
-	'scss:build:minify'
+	'lint:js',
+	'test',
+	'scss:build:minify',
+	'js:build:minify'
 ]);
