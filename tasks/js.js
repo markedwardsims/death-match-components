@@ -24,17 +24,18 @@ function compileJs(files, out, done) {
 }
 
 gulp.task('js:components', function(done) {
-    glob("./js/**/!(*.spec).js", {}, function(er, files) {
+    glob("./js/components/**/!(*.spec).js", {}, function(er, files) {
         var filesHash = files.map(function(file, index) {
             // extract the name of the component by splitting the path, then trimming off the .js
             var name = file.split('/').splice(-1)[0].slice(0, -3);
             var obj = {};
-            obj[name] = file;
+            // putting the file in an arrary is a wierd workaround: https://github.com/webpack/webpack/issues/300
+            obj[name] = [file];
             return obj;
         });
         // flatten the array of objects into a singel object
-        var flat = Object.assign.apply(Object, filesHash);
-        compileJs(flat, {path: './dist/js/components'}, done);
+        var flattenedFilesHash = Object.assign.apply(Object, filesHash);
+        compileJs(flattenedFilesHash, {path: './dist/js/components'}, done);
     });
 });
 
