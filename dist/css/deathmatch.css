@@ -877,16 +877,22 @@
     z-index: 1; } }
 
 .notification-list__item {
+  transition: opacity 300ms ease-in-out;
   border: 1px solid;
   color: #fff;
   list-style-type: none;
   padding: 10px;
-  text-align: left; }
+  text-align: left;
+  opacity: 0; }
   @media (min-width: 1048px) {
     .notification-list__item {
       margin: 0 0 5px; } }
   .notification-list__item:hover {
     cursor: pointer; }
+
+.notification-list__item--visible {
+  opacity: 1;
+  transition: opacity 300ms ease-in-out; }
 
 .notification-list__item--success {
   background-color: #008000; }
@@ -896,20 +902,6 @@
 
 .notification-list__item--error {
   background-color: #b8182b; }
-
-.notification-list__item--enter {
-  opacity: .01; }
-
-.notification-list__item--enter-active {
-  opacity: 1;
-  transition: opacity 300ms ease-in-out; }
-
-.notification-list__item--leave {
-  opacity: 1; }
-
-.notification-list__item--leave-active {
-  opacity: .01;
-  transition: opacity 300ms ease-in-out; }
 
 .warrior {
   transition: background-color .25s ease-in-out;

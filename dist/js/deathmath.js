@@ -56,7 +56,12 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(1);
 	__webpack_require__(3);
-	module.exports = __webpack_require__(2);
+	__webpack_require__(4);
+	__webpack_require__(6);
+	__webpack_require__(7);
+	__webpack_require__(8);
+	__webpack_require__(2);
+	module.exports = __webpack_require__(5);
 
 
 /***/ },
@@ -592,7 +597,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.__RewireAPI__ = exports.__ResetDependency__ = exports.__set__ = exports.__Rewire__ = exports.__GetDependency__ = exports.__get__ = undefined;
+	exports.__RewireAPI__ = exports.__ResetDependency__ = exports.__set__ = exports.__Rewire__ = exports.__GetDependency__ = exports.__get__ = exports.animationTime = exports.visibleClassName = undefined;
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
@@ -602,19 +607,45 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _base2 = _interopRequireDefault(_base);
 
+	var _addClass = __webpack_require__(4);
+
+	var _addClass2 = _interopRequireDefault(_addClass);
+
+	var _removeClass = __webpack_require__(7);
+
+	var _removeClass2 = _interopRequireDefault(_removeClass);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /**
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * # Notification
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * A notification element that is removed from DOM on click.
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @example
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * new Notification(el, {
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *   onClickHandler: handlerFunction 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * });
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @module components/notification.js
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
+
+	var visibleClassName = exports.visibleClassName = 'notification-list__item--visible';
+	var animationTime = exports.animationTime = 300;
 
 	var noop = function noop() {};
 
 	var Notification = function (_get__2) {
 	  _inherits(Notification, _get__2);
 
+	  /**
+	   * Expand constructor.
+	   * @param {Element} el
+	   * @param {Object} params
+	   */
 	  function Notification(el) {
 	    var _this;
 
@@ -631,37 +662,97 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this.el = el;
 	    _this._bindEventListenerCallbacks();
 	    _this._addEventListeners();
+	    _this.show();
 
 	    return _possibleConstructorReturn(_this);
 	  }
+
+	  /**
+	   * Create bound versions of event listener callbacks and store them.
+	   * Otherwise we can't unbind from these events later because the
+	   * function signatures won't match.
+	   */
+
 
 	  _createClass(Notification, [{
 	    key: '_bindEventListenerCallbacks',
 	    value: function _bindEventListenerCallbacks() {
 	      this._onClickBound = this._onClick.bind(this);
 	    }
+
+	    /**
+	     * Add event listeners for DOM events.
+	     */
+
 	  }, {
 	    key: '_addEventListeners',
 	    value: function _addEventListeners() {
 	      this.el.addEventListener('click', this._onClickBound);
 	    }
+
+	    /**
+	     * Remove event listeners for DOM events..
+	     */
+
 	  }, {
 	    key: '_removeEventListeners',
 	    value: function _removeEventListeners() {
 	      this.el.removeEventListener('click', this._onClickBound);
 	    }
+
+	    /**
+	     * When we are clicked, toggle the expanded state.
+	     * @param {Object} e
+	     */
+
 	  }, {
 	    key: '_onClick',
 	    value: function _onClick(e) {
-	      this.onClickHandler();
+	      this.hide();
+	      // delay the click callback by the length of the fade transition
+	      // TODO: having the animation time in css AND js doesn't feel good
+	      setTimeout(this.onClickHandler || _get__('noop'), _get__('animationTime'));
+	      setTimeout(this.remove.bind(this), _get__('animationTime'));
+	    }
+
+	    /**
+	     * Show
+	     */
+
+	  }, {
+	    key: 'show',
+	    value: function show() {
+	      _get__('addClass')(this.el, _get__('visibleClassName'));
+	    }
+
+	    /**
+	     * Hide
+	     */
+
+	  }, {
+	    key: 'hide',
+	    value: function hide() {
+	      _get__('removeClass')(this.el, _get__('visibleClassName'));
 	    }
 	  }]);
 
 	  return Notification;
 	}(_get__('Base'));
 
+	/**
+	 * Whitelisted parameters which can be set on construction.
+	 * @type {Array}
+	 */
+
+
 	_get__('Notification').prototype._whitelistedParams = ['onClickHandler'];
 
+	/**
+	 * Default values for internal properties we will be setting.
+	 * These are set on each construction so we don't leak properties
+	 * into the prototype chain.
+	 * @type {Object}
+	 */
 	_get__('Notification').prototype.defaults = {
 	  el: null,
 	  onClickHandler: null,
@@ -709,6 +800,21 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _get_original__(variableName) {
 	  switch (variableName) {
+	    case 'noop':
+	      return noop;
+
+	    case 'animationTime':
+	      return animationTime;
+
+	    case 'addClass':
+	      return _addClass2.default;
+
+	    case 'visibleClassName':
+	      return visibleClassName;
+
+	    case 'removeClass':
+	      return _removeClass2.default;
+
 	    case 'Base':
 	      return _base2.default;
 
@@ -803,6 +909,1049 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	if ((_typeOfOriginalExport === 'object' || _typeOfOriginalExport === 'function') && Object.isExtensible(Notification)) {
+	  addNonEnumerableProperty('__get__', _get__);
+	  addNonEnumerableProperty('__GetDependency__', _get__);
+	  addNonEnumerableProperty('__Rewire__', _set__);
+	  addNonEnumerableProperty('__set__', _set__);
+	  addNonEnumerableProperty('__reset__', _reset__);
+	  addNonEnumerableProperty('__ResetDependency__', _reset__);
+	  addNonEnumerableProperty('__with__', _with__);
+	  addNonEnumerableProperty('__RewireAPI__', _RewireAPI__);
+	}
+
+	exports.__get__ = _get__;
+	exports.__GetDependency__ = _get__;
+	exports.__Rewire__ = _set__;
+	exports.__set__ = _set__;
+	exports.__ResetDependency__ = _reset__;
+	exports.__RewireAPI__ = _RewireAPI__;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.__RewireAPI__ = exports.__ResetDependency__ = exports.__set__ = exports.__Rewire__ = exports.__GetDependency__ = exports.__get__ = undefined;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; /**
+	                                                                                                                                                                                                                                                   * # Add Class
+	                                                                                                                                                                                                                                                   * Add a class on an element.
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * @param {Element|Array} el An element or array of elements to update.
+	                                                                                                                                                                                                                                                   * @param {String} name
+	                                                                                                                                                                                                                                                   * @return {Element}
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * @module helpers/dom/add-class.js
+	                                                                                                                                                                                                                                                   */
+
+	var _trim = __webpack_require__(5);
+
+	var _trim2 = _interopRequireDefault(_trim);
+
+	var _hasClass = __webpack_require__(6);
+
+	var _hasClass2 = _interopRequireDefault(_hasClass);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ws = /\s+/;
+	var cleanup = /\s{2,}/g;
+
+	function addClass(el, name) {
+
+	  if (arguments.length === 2 && typeof name === 'string') {
+	    name = _get__('trim')(name).split(_get__('ws'));
+	  } else {
+	    name = name instanceof Array ? name : Array.prototype.slice.call(arguments, 1);
+	  }
+
+	  // optimize for best, most common case
+	  if (name.length === 1 && el.classList) {
+	    if (name[0]) {
+	      el.classList.add(name[0]);
+	    }
+	    return el;
+	  }
+
+	  var toAdd = [];
+	  var i = 0;
+	  var l = name.length;
+	  var item = void 0;
+	  var clsName = typeof el.className === 'string' ? el.className : el.getAttribute ? el.getAttribute('class') : '';
+
+	  // see if we have anything to add
+	  for (; i < l; i++) {
+	    item = name[i];
+	    if (item && !_get__('hasClass')(clsName, item)) {
+	      toAdd.push(item);
+	    }
+	  }
+
+	  if (toAdd.length) {
+	    if (typeof el.className === 'string') {
+	      el.className = _get__('trim')((clsName + ' ' + toAdd.join(' ')).replace(_get__('cleanup'), ' '));
+	    } else if (el.setAttribute) {
+	      el.setAttribute('class', _get__('trim')((clsName + ' ' + toAdd.join(' ')).replace(_get__('cleanup'), ' ')));
+	    }
+	  }
+
+	  return el;
+	}
+
+	exports.default = _get__('addClass');
+
+	var _RewiredData__ = Object.create(null);
+
+	var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__';
+	var _RewireAPI__ = {};
+
+	(function () {
+	  function addPropertyToAPIObject(name, value) {
+	    Object.defineProperty(_RewireAPI__, name, {
+	      value: value,
+	      enumerable: false,
+	      configurable: true
+	    });
+	  }
+
+	  addPropertyToAPIObject('__get__', _get__);
+	  addPropertyToAPIObject('__GetDependency__', _get__);
+	  addPropertyToAPIObject('__Rewire__', _set__);
+	  addPropertyToAPIObject('__set__', _set__);
+	  addPropertyToAPIObject('__reset__', _reset__);
+	  addPropertyToAPIObject('__ResetDependency__', _reset__);
+	  addPropertyToAPIObject('__with__', _with__);
+	})();
+
+	function _get__(variableName) {
+	  if (_RewiredData__ === undefined || _RewiredData__[variableName] === undefined) {
+	    return _get_original__(variableName);
+	  } else {
+	    var value = _RewiredData__[variableName];
+
+	    if (value === INTENTIONAL_UNDEFINED) {
+	      return undefined;
+	    } else {
+	      return value;
+	    }
+	  }
+	}
+
+	function _get_original__(variableName) {
+	  switch (variableName) {
+	    case 'trim':
+	      return _trim2.default;
+
+	    case 'ws':
+	      return ws;
+
+	    case 'hasClass':
+	      return _hasClass2.default;
+
+	    case 'cleanup':
+	      return cleanup;
+
+	    case 'addClass':
+	      return addClass;
+	  }
+
+	  return undefined;
+	}
+
+	function _assign__(variableName, value) {
+	  if (_RewiredData__ === undefined || _RewiredData__[variableName] === undefined) {
+	    return _set_original__(variableName, value);
+	  } else {
+	    return _RewiredData__[variableName] = value;
+	  }
+	}
+
+	function _set_original__(variableName, _value) {
+	  switch (variableName) {}
+
+	  return undefined;
+	}
+
+	function _update_operation__(operation, variableName, prefix) {
+	  var oldValue = _get__(variableName);
+
+	  var newValue = operation === '++' ? oldValue + 1 : oldValue - 1;
+
+	  _assign__(variableName, newValue);
+
+	  return prefix ? newValue : oldValue;
+	}
+
+	function _set__(variableName, value) {
+	  if ((typeof variableName === 'undefined' ? 'undefined' : _typeof(variableName)) === 'object') {
+	    Object.keys(variableName).forEach(function (name) {
+	      _RewiredData__[name] = variableName[name];
+	    });
+	  } else {
+	    if (value === undefined) {
+	      _RewiredData__[variableName] = INTENTIONAL_UNDEFINED;
+	    } else {
+	      _RewiredData__[variableName] = value;
+	    }
+
+	    return function () {
+	      _reset__(variableName);
+	    };
+	  }
+	}
+
+	function _reset__(variableName) {
+	  delete _RewiredData__[variableName];
+	}
+
+	function _with__(object) {
+	  var rewiredVariableNames = Object.keys(object);
+	  var previousValues = {};
+
+	  function reset() {
+	    rewiredVariableNames.forEach(function (variableName) {
+	      _RewiredData__[variableName] = previousValues[variableName];
+	    });
+	  }
+
+	  return function (callback) {
+	    rewiredVariableNames.forEach(function (variableName) {
+	      previousValues[variableName] = _RewiredData__[variableName];
+	      _RewiredData__[variableName] = object[variableName];
+	    });
+	    var result = callback();
+
+	    if (!!result && typeof result.then == 'function') {
+	      result.then(reset).catch(reset);
+	    } else {
+	      reset();
+	    }
+
+	    return result;
+	  };
+	}
+
+	var _typeOfOriginalExport = typeof addClass === 'undefined' ? 'undefined' : _typeof(addClass);
+
+	function addNonEnumerableProperty(name, value) {
+	  Object.defineProperty(addClass, name, {
+	    value: value,
+	    enumerable: false,
+	    configurable: true
+	  });
+	}
+
+	if ((_typeOfOriginalExport === 'object' || _typeOfOriginalExport === 'function') && Object.isExtensible(addClass)) {
+	  addNonEnumerableProperty('__get__', _get__);
+	  addNonEnumerableProperty('__GetDependency__', _get__);
+	  addNonEnumerableProperty('__Rewire__', _set__);
+	  addNonEnumerableProperty('__set__', _set__);
+	  addNonEnumerableProperty('__reset__', _reset__);
+	  addNonEnumerableProperty('__ResetDependency__', _reset__);
+	  addNonEnumerableProperty('__with__', _with__);
+	  addNonEnumerableProperty('__RewireAPI__', _RewireAPI__);
+	}
+
+	exports.__get__ = _get__;
+	exports.__GetDependency__ = _get__;
+	exports.__Rewire__ = _set__;
+	exports.__set__ = _set__;
+	exports.__ResetDependency__ = _reset__;
+	exports.__RewireAPI__ = _RewireAPI__;
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	/**
+	 * # Trim
+	 * Trim whitespace on a string.
+	 *
+	 * @param {String} str
+	 *
+	 * @module helpers/util/trim.js
+	 */
+
+	var trimRE = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g;
+
+	function trim(str) {
+	  return str.replace(_get__('trimRE'), '');
+	}
+
+	exports.default = _get__('trim');
+
+	var _RewiredData__ = Object.create(null);
+
+	var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__';
+	var _RewireAPI__ = {};
+
+	(function () {
+	  function addPropertyToAPIObject(name, value) {
+	    Object.defineProperty(_RewireAPI__, name, {
+	      value: value,
+	      enumerable: false,
+	      configurable: true
+	    });
+	  }
+
+	  addPropertyToAPIObject('__get__', _get__);
+	  addPropertyToAPIObject('__GetDependency__', _get__);
+	  addPropertyToAPIObject('__Rewire__', _set__);
+	  addPropertyToAPIObject('__set__', _set__);
+	  addPropertyToAPIObject('__reset__', _reset__);
+	  addPropertyToAPIObject('__ResetDependency__', _reset__);
+	  addPropertyToAPIObject('__with__', _with__);
+	})();
+
+	function _get__(variableName) {
+	  if (_RewiredData__ === undefined || _RewiredData__[variableName] === undefined) {
+	    return _get_original__(variableName);
+	  } else {
+	    var value = _RewiredData__[variableName];
+
+	    if (value === INTENTIONAL_UNDEFINED) {
+	      return undefined;
+	    } else {
+	      return value;
+	    }
+	  }
+	}
+
+	function _get_original__(variableName) {
+	  switch (variableName) {
+	    case 'trimRE':
+	      return trimRE;
+
+	    case 'trim':
+	      return trim;
+	  }
+
+	  return undefined;
+	}
+
+	function _assign__(variableName, value) {
+	  if (_RewiredData__ === undefined || _RewiredData__[variableName] === undefined) {
+	    return _set_original__(variableName, value);
+	  } else {
+	    return _RewiredData__[variableName] = value;
+	  }
+	}
+
+	function _set_original__(variableName, _value) {
+	  switch (variableName) {}
+
+	  return undefined;
+	}
+
+	function _update_operation__(operation, variableName, prefix) {
+	  var oldValue = _get__(variableName);
+
+	  var newValue = operation === '++' ? oldValue + 1 : oldValue - 1;
+
+	  _assign__(variableName, newValue);
+
+	  return prefix ? newValue : oldValue;
+	}
+
+	function _set__(variableName, value) {
+	  if ((typeof variableName === 'undefined' ? 'undefined' : _typeof(variableName)) === 'object') {
+	    Object.keys(variableName).forEach(function (name) {
+	      _RewiredData__[name] = variableName[name];
+	    });
+	  } else {
+	    if (value === undefined) {
+	      _RewiredData__[variableName] = INTENTIONAL_UNDEFINED;
+	    } else {
+	      _RewiredData__[variableName] = value;
+	    }
+
+	    return function () {
+	      _reset__(variableName);
+	    };
+	  }
+	}
+
+	function _reset__(variableName) {
+	  delete _RewiredData__[variableName];
+	}
+
+	function _with__(object) {
+	  var rewiredVariableNames = Object.keys(object);
+	  var previousValues = {};
+
+	  function reset() {
+	    rewiredVariableNames.forEach(function (variableName) {
+	      _RewiredData__[variableName] = previousValues[variableName];
+	    });
+	  }
+
+	  return function (callback) {
+	    rewiredVariableNames.forEach(function (variableName) {
+	      previousValues[variableName] = _RewiredData__[variableName];
+	      _RewiredData__[variableName] = object[variableName];
+	    });
+	    var result = callback();
+
+	    if (!!result && typeof result.then == 'function') {
+	      result.then(reset).catch(reset);
+	    } else {
+	      reset();
+	    }
+
+	    return result;
+	  };
+	}
+
+	var _typeOfOriginalExport = typeof trim === 'undefined' ? 'undefined' : _typeof(trim);
+
+	function addNonEnumerableProperty(name, value) {
+	  Object.defineProperty(trim, name, {
+	    value: value,
+	    enumerable: false,
+	    configurable: true
+	  });
+	}
+
+	if ((_typeOfOriginalExport === 'object' || _typeOfOriginalExport === 'function') && Object.isExtensible(trim)) {
+	  addNonEnumerableProperty('__get__', _get__);
+	  addNonEnumerableProperty('__GetDependency__', _get__);
+	  addNonEnumerableProperty('__Rewire__', _set__);
+	  addNonEnumerableProperty('__set__', _set__);
+	  addNonEnumerableProperty('__reset__', _reset__);
+	  addNonEnumerableProperty('__ResetDependency__', _reset__);
+	  addNonEnumerableProperty('__with__', _with__);
+	  addNonEnumerableProperty('__RewireAPI__', _RewireAPI__);
+	}
+
+	exports.__get__ = _get__;
+	exports.__GetDependency__ = _get__;
+	exports.__Rewire__ = _set__;
+	exports.__set__ = _set__;
+	exports.__ResetDependency__ = _reset__;
+	exports.__RewireAPI__ = _RewireAPI__;
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	/**
+	 * # Has Class
+	 * See if an element has a class.
+	 *
+	 * @param {Element|String} el
+	 * @param {String} name
+	 * @return {Boolean}
+	 *
+	 * @module helpers/dom/has-class.js
+	 */
+	function hasClass(el, name) {
+	  var cName = ((typeof el === 'undefined' ? 'undefined' : _typeof(el)) === 'object' ? el.className || el.getAttribute && el.getAttribute('class') || '' : el || '').replace(/[\t\r\n\f]/g, ' ');
+	  return (' ' + cName + ' ').indexOf(' ' + name + ' ') !== -1;
+	}
+
+	exports.default = _get__('hasClass');
+
+	var _RewiredData__ = Object.create(null);
+
+	var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__';
+	var _RewireAPI__ = {};
+
+	(function () {
+	  function addPropertyToAPIObject(name, value) {
+	    Object.defineProperty(_RewireAPI__, name, {
+	      value: value,
+	      enumerable: false,
+	      configurable: true
+	    });
+	  }
+
+	  addPropertyToAPIObject('__get__', _get__);
+	  addPropertyToAPIObject('__GetDependency__', _get__);
+	  addPropertyToAPIObject('__Rewire__', _set__);
+	  addPropertyToAPIObject('__set__', _set__);
+	  addPropertyToAPIObject('__reset__', _reset__);
+	  addPropertyToAPIObject('__ResetDependency__', _reset__);
+	  addPropertyToAPIObject('__with__', _with__);
+	})();
+
+	function _get__(variableName) {
+	  if (_RewiredData__ === undefined || _RewiredData__[variableName] === undefined) {
+	    return _get_original__(variableName);
+	  } else {
+	    var value = _RewiredData__[variableName];
+
+	    if (value === INTENTIONAL_UNDEFINED) {
+	      return undefined;
+	    } else {
+	      return value;
+	    }
+	  }
+	}
+
+	function _get_original__(variableName) {
+	  switch (variableName) {
+	    case 'hasClass':
+	      return hasClass;
+	  }
+
+	  return undefined;
+	}
+
+	function _assign__(variableName, value) {
+	  if (_RewiredData__ === undefined || _RewiredData__[variableName] === undefined) {
+	    return _set_original__(variableName, value);
+	  } else {
+	    return _RewiredData__[variableName] = value;
+	  }
+	}
+
+	function _set_original__(variableName, _value) {
+	  switch (variableName) {}
+
+	  return undefined;
+	}
+
+	function _update_operation__(operation, variableName, prefix) {
+	  var oldValue = _get__(variableName);
+
+	  var newValue = operation === '++' ? oldValue + 1 : oldValue - 1;
+
+	  _assign__(variableName, newValue);
+
+	  return prefix ? newValue : oldValue;
+	}
+
+	function _set__(variableName, value) {
+	  if ((typeof variableName === 'undefined' ? 'undefined' : _typeof(variableName)) === 'object') {
+	    Object.keys(variableName).forEach(function (name) {
+	      _RewiredData__[name] = variableName[name];
+	    });
+	  } else {
+	    if (value === undefined) {
+	      _RewiredData__[variableName] = INTENTIONAL_UNDEFINED;
+	    } else {
+	      _RewiredData__[variableName] = value;
+	    }
+
+	    return function () {
+	      _reset__(variableName);
+	    };
+	  }
+	}
+
+	function _reset__(variableName) {
+	  delete _RewiredData__[variableName];
+	}
+
+	function _with__(object) {
+	  var rewiredVariableNames = Object.keys(object);
+	  var previousValues = {};
+
+	  function reset() {
+	    rewiredVariableNames.forEach(function (variableName) {
+	      _RewiredData__[variableName] = previousValues[variableName];
+	    });
+	  }
+
+	  return function (callback) {
+	    rewiredVariableNames.forEach(function (variableName) {
+	      previousValues[variableName] = _RewiredData__[variableName];
+	      _RewiredData__[variableName] = object[variableName];
+	    });
+	    var result = callback();
+
+	    if (!!result && typeof result.then == 'function') {
+	      result.then(reset).catch(reset);
+	    } else {
+	      reset();
+	    }
+
+	    return result;
+	  };
+	}
+
+	var _typeOfOriginalExport = typeof hasClass === 'undefined' ? 'undefined' : _typeof(hasClass);
+
+	function addNonEnumerableProperty(name, value) {
+	  Object.defineProperty(hasClass, name, {
+	    value: value,
+	    enumerable: false,
+	    configurable: true
+	  });
+	}
+
+	if ((_typeOfOriginalExport === 'object' || _typeOfOriginalExport === 'function') && Object.isExtensible(hasClass)) {
+	  addNonEnumerableProperty('__get__', _get__);
+	  addNonEnumerableProperty('__GetDependency__', _get__);
+	  addNonEnumerableProperty('__Rewire__', _set__);
+	  addNonEnumerableProperty('__set__', _set__);
+	  addNonEnumerableProperty('__reset__', _reset__);
+	  addNonEnumerableProperty('__ResetDependency__', _reset__);
+	  addNonEnumerableProperty('__with__', _with__);
+	  addNonEnumerableProperty('__RewireAPI__', _RewireAPI__);
+	}
+
+	exports.__get__ = _get__;
+	exports.__GetDependency__ = _get__;
+	exports.__Rewire__ = _set__;
+	exports.__set__ = _set__;
+	exports.__ResetDependency__ = _reset__;
+	exports.__RewireAPI__ = _RewireAPI__;
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.__RewireAPI__ = exports.__ResetDependency__ = exports.__set__ = exports.__Rewire__ = exports.__GetDependency__ = exports.__get__ = undefined;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; /**
+	                                                                                                                                                                                                                                                   * # Remove Class
+	                                                                                                                                                                                                                                                   * Remove a class on an element.
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * @param {Element|Array} el An element or array of elements to update.
+	                                                                                                                                                                                                                                                   * @param {String} name
+	                                                                                                                                                                                                                                                   * @return {Element}
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * @module helpers/dom/remove-class.js
+	                                                                                                                                                                                                                                                   */
+
+	var _trim = __webpack_require__(5);
+
+	var _trim2 = _interopRequireDefault(_trim);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var ws = /\s+/;
+	var cleanup = /\s{2,}/g;
+
+	function removeClass(el, name) {
+
+	  if (arguments.length === 2 && typeof name === 'string') {
+	    name = _get__('trim')(name).split(_get__('ws'));
+	  } else {
+	    name = name instanceof Array ? name : Array.prototype.slice.call(arguments, 1);
+	  }
+
+	  // optimize for best, most common case
+	  if (name.length === 1 && el.classList) {
+	    if (name[0]) el.classList.remove(name[0]);
+	    return el;
+	  }
+
+	  // store two copies
+	  var clsName = ' ' + (typeof el.className === 'string' ? el.className : el.getAttribute ? el.getAttribute('class') : '') + ' ';
+	  var result = clsName;
+	  var current = void 0;
+	  var start = void 0;
+	  for (var i = 0, l = name.length; i < l; i++) {
+	    current = name[i];
+	    start = current ? result.indexOf(' ' + current + ' ') : -1;
+	    if (start !== -1) {
+	      start += 1;
+	      result = result.slice(0, start) + result.slice(start + current.length);
+	    }
+	  }
+
+	  // only write if modified
+	  if (clsName !== result) {
+	    if (typeof el.className === 'string') {
+	      el.className = _get__('trim')(result.replace(_get__('cleanup'), ' '));
+	    } else if (el.setAttribute) {
+	      el.setAttribute('class', _get__('trim')(result.replace(_get__('cleanup'), ' ')));
+	    }
+	  }
+
+	  return el;
+	}
+
+	exports.default = _get__('removeClass');
+
+	var _RewiredData__ = Object.create(null);
+
+	var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__';
+	var _RewireAPI__ = {};
+
+	(function () {
+	  function addPropertyToAPIObject(name, value) {
+	    Object.defineProperty(_RewireAPI__, name, {
+	      value: value,
+	      enumerable: false,
+	      configurable: true
+	    });
+	  }
+
+	  addPropertyToAPIObject('__get__', _get__);
+	  addPropertyToAPIObject('__GetDependency__', _get__);
+	  addPropertyToAPIObject('__Rewire__', _set__);
+	  addPropertyToAPIObject('__set__', _set__);
+	  addPropertyToAPIObject('__reset__', _reset__);
+	  addPropertyToAPIObject('__ResetDependency__', _reset__);
+	  addPropertyToAPIObject('__with__', _with__);
+	})();
+
+	function _get__(variableName) {
+	  if (_RewiredData__ === undefined || _RewiredData__[variableName] === undefined) {
+	    return _get_original__(variableName);
+	  } else {
+	    var value = _RewiredData__[variableName];
+
+	    if (value === INTENTIONAL_UNDEFINED) {
+	      return undefined;
+	    } else {
+	      return value;
+	    }
+	  }
+	}
+
+	function _get_original__(variableName) {
+	  switch (variableName) {
+	    case 'trim':
+	      return _trim2.default;
+
+	    case 'ws':
+	      return ws;
+
+	    case 'cleanup':
+	      return cleanup;
+
+	    case 'removeClass':
+	      return removeClass;
+	  }
+
+	  return undefined;
+	}
+
+	function _assign__(variableName, value) {
+	  if (_RewiredData__ === undefined || _RewiredData__[variableName] === undefined) {
+	    return _set_original__(variableName, value);
+	  } else {
+	    return _RewiredData__[variableName] = value;
+	  }
+	}
+
+	function _set_original__(variableName, _value) {
+	  switch (variableName) {}
+
+	  return undefined;
+	}
+
+	function _update_operation__(operation, variableName, prefix) {
+	  var oldValue = _get__(variableName);
+
+	  var newValue = operation === '++' ? oldValue + 1 : oldValue - 1;
+
+	  _assign__(variableName, newValue);
+
+	  return prefix ? newValue : oldValue;
+	}
+
+	function _set__(variableName, value) {
+	  if ((typeof variableName === 'undefined' ? 'undefined' : _typeof(variableName)) === 'object') {
+	    Object.keys(variableName).forEach(function (name) {
+	      _RewiredData__[name] = variableName[name];
+	    });
+	  } else {
+	    if (value === undefined) {
+	      _RewiredData__[variableName] = INTENTIONAL_UNDEFINED;
+	    } else {
+	      _RewiredData__[variableName] = value;
+	    }
+
+	    return function () {
+	      _reset__(variableName);
+	    };
+	  }
+	}
+
+	function _reset__(variableName) {
+	  delete _RewiredData__[variableName];
+	}
+
+	function _with__(object) {
+	  var rewiredVariableNames = Object.keys(object);
+	  var previousValues = {};
+
+	  function reset() {
+	    rewiredVariableNames.forEach(function (variableName) {
+	      _RewiredData__[variableName] = previousValues[variableName];
+	    });
+	  }
+
+	  return function (callback) {
+	    rewiredVariableNames.forEach(function (variableName) {
+	      previousValues[variableName] = _RewiredData__[variableName];
+	      _RewiredData__[variableName] = object[variableName];
+	    });
+	    var result = callback();
+
+	    if (!!result && typeof result.then == 'function') {
+	      result.then(reset).catch(reset);
+	    } else {
+	      reset();
+	    }
+
+	    return result;
+	  };
+	}
+
+	var _typeOfOriginalExport = typeof removeClass === 'undefined' ? 'undefined' : _typeof(removeClass);
+
+	function addNonEnumerableProperty(name, value) {
+	  Object.defineProperty(removeClass, name, {
+	    value: value,
+	    enumerable: false,
+	    configurable: true
+	  });
+	}
+
+	if ((_typeOfOriginalExport === 'object' || _typeOfOriginalExport === 'function') && Object.isExtensible(removeClass)) {
+	  addNonEnumerableProperty('__get__', _get__);
+	  addNonEnumerableProperty('__GetDependency__', _get__);
+	  addNonEnumerableProperty('__Rewire__', _set__);
+	  addNonEnumerableProperty('__set__', _set__);
+	  addNonEnumerableProperty('__reset__', _reset__);
+	  addNonEnumerableProperty('__ResetDependency__', _reset__);
+	  addNonEnumerableProperty('__with__', _with__);
+	  addNonEnumerableProperty('__RewireAPI__', _RewireAPI__);
+	}
+
+	exports.__get__ = _get__;
+	exports.__GetDependency__ = _get__;
+	exports.__Rewire__ = _set__;
+	exports.__set__ = _set__;
+	exports.__ResetDependency__ = _reset__;
+	exports.__RewireAPI__ = _RewireAPI__;
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.__RewireAPI__ = exports.__ResetDependency__ = exports.__set__ = exports.__Rewire__ = exports.__GetDependency__ = exports.__get__ = undefined;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; /**
+	                                                                                                                                                                                                                                                   * # Toggle Class
+	                                                                                                                                                                                                                                                   * Toggle a class on an element given a condition.
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * @param {Element|Array} el An element or array of elements to update.
+	                                                                                                                                                                                                                                                   * @param {String} name
+	                                                                                                                                                                                                                                                   * @param {Boolean} enable
+	                                                                                                                                                                                                                                                   * @return {Element}
+	                                                                                                                                                                                                                                                   *
+	                                                                                                                                                                                                                                                   * @module  helpers/dom/toggle-class.js
+	                                                                                                                                                                                                                                                   */
+
+	var _hasClass = __webpack_require__(6);
+
+	var _hasClass2 = _interopRequireDefault(_hasClass);
+
+	var _addClass = __webpack_require__(4);
+
+	var _addClass2 = _interopRequireDefault(_addClass);
+
+	var _removeClass = __webpack_require__(7);
+
+	var _removeClass2 = _interopRequireDefault(_removeClass);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function toggleClass(el, name, enable) {
+
+	  if (!el) {
+	    return;
+	  }
+
+	  // If we're passed an array, toggle the class on each.
+	  if (el instanceof NodeList || el instanceof Array) {
+
+	    for (var i = 0, len = el.length; i < len; i++) {
+	      _get__('toggleClass')(el[i], name, enable);
+	    }
+
+	    return;
+	  }
+
+	  var action = void 0;
+	  if (enable !== undefined) {
+	    enable = typeof enable === 'function' ? enable.call(null, el) : enable;
+	    action = enable ? 'add' : 'remove';
+	  } else {
+	    action = _get__('hasClass')(el, name) ? 'remove' : 'add';
+	  }
+
+	  return (action === 'add' ? _get__('addClass') : _get__('removeClass'))(el, name);
+	}
+
+	exports.default = _get__('toggleClass');
+
+	var _RewiredData__ = Object.create(null);
+
+	var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__';
+	var _RewireAPI__ = {};
+
+	(function () {
+	  function addPropertyToAPIObject(name, value) {
+	    Object.defineProperty(_RewireAPI__, name, {
+	      value: value,
+	      enumerable: false,
+	      configurable: true
+	    });
+	  }
+
+	  addPropertyToAPIObject('__get__', _get__);
+	  addPropertyToAPIObject('__GetDependency__', _get__);
+	  addPropertyToAPIObject('__Rewire__', _set__);
+	  addPropertyToAPIObject('__set__', _set__);
+	  addPropertyToAPIObject('__reset__', _reset__);
+	  addPropertyToAPIObject('__ResetDependency__', _reset__);
+	  addPropertyToAPIObject('__with__', _with__);
+	})();
+
+	function _get__(variableName) {
+	  if (_RewiredData__ === undefined || _RewiredData__[variableName] === undefined) {
+	    return _get_original__(variableName);
+	  } else {
+	    var value = _RewiredData__[variableName];
+
+	    if (value === INTENTIONAL_UNDEFINED) {
+	      return undefined;
+	    } else {
+	      return value;
+	    }
+	  }
+	}
+
+	function _get_original__(variableName) {
+	  switch (variableName) {
+	    case 'toggleClass':
+	      return toggleClass;
+
+	    case 'hasClass':
+	      return _hasClass2.default;
+
+	    case 'addClass':
+	      return _addClass2.default;
+
+	    case 'removeClass':
+	      return _removeClass2.default;
+	  }
+
+	  return undefined;
+	}
+
+	function _assign__(variableName, value) {
+	  if (_RewiredData__ === undefined || _RewiredData__[variableName] === undefined) {
+	    return _set_original__(variableName, value);
+	  } else {
+	    return _RewiredData__[variableName] = value;
+	  }
+	}
+
+	function _set_original__(variableName, _value) {
+	  switch (variableName) {}
+
+	  return undefined;
+	}
+
+	function _update_operation__(operation, variableName, prefix) {
+	  var oldValue = _get__(variableName);
+
+	  var newValue = operation === '++' ? oldValue + 1 : oldValue - 1;
+
+	  _assign__(variableName, newValue);
+
+	  return prefix ? newValue : oldValue;
+	}
+
+	function _set__(variableName, value) {
+	  if ((typeof variableName === 'undefined' ? 'undefined' : _typeof(variableName)) === 'object') {
+	    Object.keys(variableName).forEach(function (name) {
+	      _RewiredData__[name] = variableName[name];
+	    });
+	  } else {
+	    if (value === undefined) {
+	      _RewiredData__[variableName] = INTENTIONAL_UNDEFINED;
+	    } else {
+	      _RewiredData__[variableName] = value;
+	    }
+
+	    return function () {
+	      _reset__(variableName);
+	    };
+	  }
+	}
+
+	function _reset__(variableName) {
+	  delete _RewiredData__[variableName];
+	}
+
+	function _with__(object) {
+	  var rewiredVariableNames = Object.keys(object);
+	  var previousValues = {};
+
+	  function reset() {
+	    rewiredVariableNames.forEach(function (variableName) {
+	      _RewiredData__[variableName] = previousValues[variableName];
+	    });
+	  }
+
+	  return function (callback) {
+	    rewiredVariableNames.forEach(function (variableName) {
+	      previousValues[variableName] = _RewiredData__[variableName];
+	      _RewiredData__[variableName] = object[variableName];
+	    });
+	    var result = callback();
+
+	    if (!!result && typeof result.then == 'function') {
+	      result.then(reset).catch(reset);
+	    } else {
+	      reset();
+	    }
+
+	    return result;
+	  };
+	}
+
+	var _typeOfOriginalExport = typeof toggleClass === 'undefined' ? 'undefined' : _typeof(toggleClass);
+
+	function addNonEnumerableProperty(name, value) {
+	  Object.defineProperty(toggleClass, name, {
+	    value: value,
+	    enumerable: false,
+	    configurable: true
+	  });
+	}
+
+	if ((_typeOfOriginalExport === 'object' || _typeOfOriginalExport === 'function') && Object.isExtensible(toggleClass)) {
 	  addNonEnumerableProperty('__get__', _get__);
 	  addNonEnumerableProperty('__GetDependency__', _get__);
 	  addNonEnumerableProperty('__Rewire__', _set__);

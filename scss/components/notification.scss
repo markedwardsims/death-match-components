@@ -1,3 +1,5 @@
+$transition: opacity 300ms ease-in-out;
+
 .notification-list {
   @include media-breakpoint-up('lg') {
     position: fixed;
@@ -9,11 +11,13 @@
 }
 
 .notification-list__item {
+  transition: $transition;
   border: 1px solid;
   color: $white;
   list-style-type: none;
   padding: 10px;
   text-align: left;
+  opacity: 0;
 
   @include media-breakpoint-up('lg') {
     margin: 0 0 5px;
@@ -24,7 +28,11 @@
   }
 }
 
-// notification themes
+.notification-list__item--visible {
+  opacity: 1;
+  transition: $transition;
+}
+
 .notification-list__item--success {
   background-color: $green;
 }
@@ -35,26 +43,4 @@
 
 .notification-list__item--error {
   background-color: $red;
-}
-
-
-// css transition group styles
-$animation-time: 300ms;
-
-.notification-list__item--enter {
-  opacity: .01;
-}
-
-.notification-list__item--enter-active {
-  opacity: 1;
-  transition: opacity $animation-time ease-in-out;
-}
-
-.notification-list__item--leave {
-  opacity: 1;
-}
-
-.notification-list__item--leave-active {
-  opacity: .01;
-  transition: opacity $animation-time ease-in-out;
 }
