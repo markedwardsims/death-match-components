@@ -48,4 +48,16 @@ describe('the Notification component', function() {
 		expect(handler.called).to.eql(true);
 	});
 
+	it('should auto dismiss if the autoDismissTimeout parameter is provided', () => {
+		let autoDismissTimeout = 5000;
+		let parent = document.createElement("div");
+		let el = document.createElement("div");
+		parent.appendChild(el);
+		let component = new Notification(el, {
+			autoDismissTimeout: autoDismissTimeout
+		});
+		clock.tick(animationTime + autoDismissTimeout);
+		expect(parent.childElementCount).to.eql(0);
+	});
+
 });

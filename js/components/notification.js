@@ -4,7 +4,8 @@
  *
  * @example
  * new Notification(el, {
- *   onClickHandler: handlerFunction 
+ *   onClickHandler: handlerFunction,
+ *   autoDismissTimeout: 5000
  * });
  *
  * @module components/notification.js
@@ -14,6 +15,9 @@ import Base from './base.js';
 import addClass from '../helpers/dom/add-class.js';
 import removeClass from '../helpers/dom/remove-class.js';
 
+
+// TODO: these exports are to decouple the values from the test, feels a little uncomfortable
+// but is there a better alternative?
 export const visibleClassName = 'notification-list__item--visible';
 export const animationTime = 300;
 
@@ -37,7 +41,11 @@ class Notification extends Base {
     this.el = el;
     this._bindEventListenerCallbacks();
     this._addEventListeners();
-    this.show();
+    this._show();
+
+    if(params.autoDismissTimeout) {
+      setTimeout(this._dismissBound, params.autoDismissTimeout);
+    }
 
   }
 
@@ -48,6 +56,7 @@ class Notification extends Base {
    */
   _bindEventListenerCallbacks() {
     this._onClickBound = this._onClick.bind(this);
+    this._dismissBound = this._dismiss.bind(this);
   }
 
   /**
@@ -65,11 +74,18 @@ class Notification extends Base {
   }
 
   /**
-   * When we are clicked, toggle the expanded state.
+   * When we are clicked, dismiss the notification.
    * @param {Object} e
    */
   _onClick(e) {
-    this.hide();
+    this._dismissBound();
+  }
+
+  /**
+   * Dismiss
+   */
+   _dismiss() {
+    this._hide();
     // delay the click callback by the length of the fade transition
     // TODO: having the animation time in css AND js doesn't feel good
     setTimeout((this.onClickHandler || noop), animationTime);
@@ -79,14 +95,14 @@ class Notification extends Base {
   /**
    * Show
    */
-  show() {
+  _show() {
     addClass(this.el, visibleClassName);
   }
 
   /**
    * Hide
    */
-  hide() {
+  _hide() {
     removeClass(this.el, visibleClassName);
   }
 
@@ -96,7 +112,7 @@ class Notification extends Base {
  * Whitelisted parameters which can be set on construction.
  * @type {Array}
  */
-Notification.prototype._whitelistedParams = ['onClickHandler'];
+Notification.prototype._whitelistedParams = ['onClickHandler', 'autoDismissTimeout'];
 
 
 /**
@@ -108,7 +124,9 @@ Notification.prototype._whitelistedParams = ['onClickHandler'];
 Notification.prototype.defaults = {
   el: null,
   onClickHandler: null,
-  _onClickBound: null
+  autoDismissTimeout: null,
+  _onClickBound: null,
+  _dismissBound: null
 };
 
 export default Notification;
