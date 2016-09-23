@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
-import Notification, { visibleClassName, animationTime } from './notification.js';
+import Notification from './notification.js';
+import { baseClassName, visibleClassName, animationTime } from '../config/notification.js';
 
 describe('the Notification component', function() {
 
@@ -37,11 +38,11 @@ describe('the Notification component', function() {
 		expect(el.className).to.eql('');
 	});
 
-	it('should call the onClickHandler callback on click', () => {
+	it('should call the onAfterClick callback on click', () => {
 		let el = document.createElement("div");
 		let handler = sinon.spy();
 		let component = new Notification(el, {
-			onClickHandler: handler
+			onAfterClick: handler
 		});
 		el.click();
 		clock.tick(animationTime);
@@ -59,5 +60,14 @@ describe('the Notification component', function() {
 		clock.tick(animationTime + autoDismissTimeout);
 		expect(parent.childElementCount).to.eql(0);
 	});
+
+	it('should add a theme class if provided', () => {
+		let el = document.createElement("div");
+		let theme = 'foo';
+		let component = new Notification(el, {
+			theme: theme
+		});
+		expect(el.className).to.eql(visibleClassName + ' ' + baseClassName + '--' + theme);
+	})
 
 });

@@ -56,10 +56,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	__webpack_require__(1);
 	__webpack_require__(3);
+	__webpack_require__(8);
 	__webpack_require__(4);
 	__webpack_require__(6);
 	__webpack_require__(7);
-	__webpack_require__(8);
+	__webpack_require__(9);
 	__webpack_require__(2);
 	module.exports = __webpack_require__(5);
 
@@ -597,7 +598,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.__RewireAPI__ = exports.__ResetDependency__ = exports.__set__ = exports.__Rewire__ = exports.__GetDependency__ = exports.__get__ = exports.animationTime = exports.visibleClassName = undefined;
+	exports.__RewireAPI__ = exports.__ResetDependency__ = exports.__set__ = exports.__Rewire__ = exports.__GetDependency__ = exports.__get__ = undefined;
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
@@ -615,6 +616,8 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var _removeClass2 = _interopRequireDefault(_removeClass);
 
+	var _notification = __webpack_require__(8);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -627,14 +630,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @example
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * new Notification(el, {
-	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *   onClickHandler: handlerFunction 
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *   onAfterClick: handlerFunction,
+	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *   autoDismissTimeout: 5000
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * });
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                *
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                * @module components/notification.js
 	                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                */
-
-	var visibleClassName = exports.visibleClassName = 'notification-list__item--visible';
-	var animationTime = exports.animationTime = 300;
 
 	var noop = function noop() {};
 
@@ -662,7 +663,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this.el = el;
 	    _this._bindEventListenerCallbacks();
 	    _this._addEventListeners();
-	    _this.show();
+	    _this._show();
+
+	    if (params.theme) {
+	      _get__('addClass')(_this.el, _get__('baseClassName') + '--' + params.theme);
+	    }
+
+	    if (params.autoDismissTimeout) {
+	      setTimeout(_this._dismissBound, params.autoDismissTimeout);
+	    }
 
 	    return _possibleConstructorReturn(_this);
 	  }
@@ -678,6 +687,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    key: '_bindEventListenerCallbacks',
 	    value: function _bindEventListenerCallbacks() {
 	      this._onClickBound = this._onClick.bind(this);
+	      this._dismissBound = this._dismiss.bind(this);
 	    }
 
 	    /**
@@ -701,17 +711,27 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    /**
-	     * When we are clicked, toggle the expanded state.
+	     * When we are clicked, dismiss the notification.
 	     * @param {Object} e
 	     */
 
 	  }, {
 	    key: '_onClick',
 	    value: function _onClick(e) {
-	      this.hide();
+	      this._dismissBound();
+	    }
+
+	    /**
+	     * Dismiss
+	     */
+
+	  }, {
+	    key: '_dismiss',
+	    value: function _dismiss() {
+	      this._hide();
 	      // delay the click callback by the length of the fade transition
 	      // TODO: having the animation time in css AND js doesn't feel good
-	      setTimeout(this.onClickHandler || _get__('noop'), _get__('animationTime'));
+	      setTimeout(this.onAfterClick || _get__('noop'), _get__('animationTime'));
 	      setTimeout(this.remove.bind(this), _get__('animationTime'));
 	    }
 
@@ -720,8 +740,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 
 	  }, {
-	    key: 'show',
-	    value: function show() {
+	    key: '_show',
+	    value: function _show() {
 	      _get__('addClass')(this.el, _get__('visibleClassName'));
 	    }
 
@@ -730,8 +750,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	     */
 
 	  }, {
-	    key: 'hide',
-	    value: function hide() {
+	    key: '_hide',
+	    value: function _hide() {
 	      _get__('removeClass')(this.el, _get__('visibleClassName'));
 	    }
 	  }]);
@@ -745,7 +765,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 
 
-	_get__('Notification').prototype._whitelistedParams = ['onClickHandler'];
+	_get__('Notification').prototype._whitelistedParams = ['onAfterClick', 'autoDismissTimeout'];
 
 	/**
 	 * Default values for internal properties we will be setting.
@@ -755,8 +775,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	_get__('Notification').prototype.defaults = {
 	  el: null,
-	  onClickHandler: null,
-	  _onClickBound: null
+	  onAfterClick: null,
+	  autoDismissTimeout: null,
+	  _onClickBound: null,
+	  _dismissBound: null
 	};
 
 	exports.default = _get__('Notification');
@@ -800,17 +822,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _get_original__(variableName) {
 	  switch (variableName) {
+	    case 'addClass':
+	      return _addClass2.default;
+
+	    case 'baseClassName':
+	      return _notification.baseClassName;
+
 	    case 'noop':
 	      return noop;
 
 	    case 'animationTime':
-	      return animationTime;
-
-	    case 'addClass':
-	      return _addClass2.default;
+	      return _notification.animationTime;
 
 	    case 'visibleClassName':
-	      return visibleClassName;
+	      return _notification.visibleClassName;
 
 	    case 'removeClass':
 	      return _removeClass2.default;
@@ -1749,6 +1774,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var baseClassName = exports.baseClassName = 'notification-list__item';
+	var visibleClassName = exports.visibleClassName = 'notification-list__item--visible';
+		var animationTime = exports.animationTime = 300;
+
+/***/ },
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

@@ -4,7 +4,7 @@
  *
  * @example
  * new Notification(el, {
- *   onClickHandler: handlerFunction,
+ *   onAfterClick: handlerFunction,
  *   autoDismissTimeout: 5000
  * });
  *
@@ -14,12 +14,7 @@
 import Base from './base.js';
 import addClass from '../helpers/dom/add-class.js';
 import removeClass from '../helpers/dom/remove-class.js';
-
-
-// TODO: these exports are to decouple the values from the test, feels a little uncomfortable
-// but is there a better alternative?
-export const visibleClassName = 'notification-list__item--visible';
-export const animationTime = 300;
+import { baseClassName, visibleClassName, animationTime } from '../config/notification.js';
 
 const noop = () => {};
 
@@ -42,6 +37,10 @@ class Notification extends Base {
     this._bindEventListenerCallbacks();
     this._addEventListeners();
     this._show();
+
+    if(params.theme) {
+      addClass(this.el, baseClassName + '--' + params.theme);
+    }
 
     if(params.autoDismissTimeout) {
       setTimeout(this._dismissBound, params.autoDismissTimeout);
@@ -88,7 +87,7 @@ class Notification extends Base {
     this._hide();
     // delay the click callback by the length of the fade transition
     // TODO: having the animation time in css AND js doesn't feel good
-    setTimeout((this.onClickHandler || noop), animationTime);
+    setTimeout((this.onAfterClick || noop), animationTime);
     setTimeout(this.remove.bind(this), animationTime);
   }
 
@@ -112,7 +111,7 @@ class Notification extends Base {
  * Whitelisted parameters which can be set on construction.
  * @type {Array}
  */
-Notification.prototype._whitelistedParams = ['onClickHandler', 'autoDismissTimeout'];
+Notification.prototype._whitelistedParams = ['onAfterClick', 'autoDismissTimeout'];
 
 
 /**
@@ -123,7 +122,7 @@ Notification.prototype._whitelistedParams = ['onClickHandler', 'autoDismissTimeo
  */
 Notification.prototype.defaults = {
   el: null,
-  onClickHandler: null,
+  onAfterClick: null,
   autoDismissTimeout: null,
   _onClickBound: null,
   _dismissBound: null
