@@ -1,3 +1,3 @@
 export const baseClassName = 'notification-list__item';
-export const visibleClassName = 'notification-list__item--visible';
+export const visibleClassName = baseClassName + '--visible';
 export const animationTime = 300;
