@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 import Notification from './notification.js';
 import { baseClassName, visibleClassName, animationTime } from '../config/notification.js';
+import hasClass from '../helpers/dom/has-class';
 
 describe('the Notification component', function() {
 
@@ -18,7 +19,7 @@ describe('the Notification component', function() {
 	it('should add the visible class when instantiated', () => {
 		let el = document.createElement("div");
 		let component = new Notification(el);
-		expect(el.className).to.eql(visibleClassName);
+		expect(hasClass(el, visibleClassName)).to.eql(true);
 	});
 
 	it('should remove itself on click', () => {
@@ -35,7 +36,7 @@ describe('the Notification component', function() {
 		let el = document.createElement("div");
 		let component = new Notification(el);
 		el.click();
-		expect(el.className).to.eql('');
+		expect(hasClass(el, visibleClassName)).to.eql(false);
 	});
 
 	it('should call the onAfterClick callback on click', () => {
@@ -67,7 +68,7 @@ describe('the Notification component', function() {
 		let component = new Notification(el, {
 			theme: theme
 		});
-		expect(el.className).to.eql(visibleClassName + ' ' + baseClassName + '--' + theme);
+		expect(hasClass(el, baseClassName + '--foo')).to.eql(true);
 	})
 
 });
