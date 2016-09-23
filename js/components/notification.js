@@ -33,7 +33,11 @@ class Notification extends Base {
       return;
     }
 
-    this.el = el;
+    // TODO: what is the advantage of using _cacheElements to create this reference
+    // to the element?
+    this.el = el; 
+
+    this._bindDismiss();
     this._bindEventListenerCallbacks();
     this._addEventListeners();
     this._show();
@@ -49,24 +53,33 @@ class Notification extends Base {
   }
 
   /**
+   * Because we're calling the dismiss method from insise a timeout
+   * we need to bind it to the Notification class context
+   */
+  _bindDismiss() {
+    this._dismissBound = this._dismiss.bind(this);
+  }
+
+  /**
    * Create bound versions of event listener callbacks and store them.
    * Otherwise we can't unbind from these events later because the
    * function signatures won't match.
    */
   _bindEventListenerCallbacks() {
     this._onClickBound = this._onClick.bind(this);
-    this._dismissBound = this._dismiss.bind(this);
   }
 
   /**
-   * Add event listeners for DOM events.
+   * Add event listeners for DOM events. Auto envoced by the base class on 
+   * update and remove.
    */
   _addEventListeners() {
     this.el.addEventListener('click', this._onClickBound);
   }
 
   /**
-   * Remove event listeners for DOM events..
+   * Remove event listeners for DOM events. Auto envoced by the base class on 
+   * update and remove.
    */
   _removeEventListeners() {
     this.el.removeEventListener('click', this._onClickBound);
