@@ -1,30 +1,18 @@
 var webpack = require('webpack');
 var path = require('path');
+var jsLoader = require('./webpack/loader.js.js');
+var extensions = require('./webpack/extensions.js');
 
 module.exports = {
-    entry: ['babel-polyfill', './test-main.js'],
-    output: {
-        path: './tmp',
-        filename: '[name].built.js'
-    },
+    entry: ['babel-polyfill'],
     resolve: {
         root: path.resolve(__dirname),
-        alias: {},
-        extensions: ['', '.js']
+        extensions: extensions
     },
     module: {
         loaders: [
-            {
-                test: /\.js?$/,
-                exclude: /(node_modules)/,
-                loader: 'babel',
-                query: {
-                    presets: ['es2015'],
-                    plugins: ['rewire']
-                }
-            }
+            jsLoader
         ]
     },
     devtool: 'cheap-module-source-map'
-    // devtool: 'inline-source-map'
 };

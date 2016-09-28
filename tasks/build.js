@@ -1,10 +1,18 @@
 const gulp = require('gulp');
+const runSequence = require('run-sequence');
 
-gulp.task('build', [
-	'clean:dist',
-	'lint:scss',
-	'lint:js',
-	// 'test',
-	'scss:build:minify',
-	'js:build:minify'
-]);
+gulp.task('build', function(done) {
+	runSequence(
+		'test',
+		'clean:dist',
+		[
+			'lint:scss',
+			'lint:js'
+		],
+		[
+			'scss:build:minify',
+			'js:build:minify'
+		],
+		done
+	);
+});

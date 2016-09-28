@@ -1,10 +1,4 @@
-var webpackConfig = require('./webpack.config.js');
-
-delete webpackConfig.entry;
-
-// provide the resolve path to the sinon lib, but don't parse it
-webpackConfig.resolve.alias.sinon = 'sinon/pkg/sinon';
-webpackConfig.module.noParse = [ /node_modules\/sinon\// ];
+var webpackConfig = require('./webpack.config.test.js');
 
 module.exports = function(config) {
   config.set({
@@ -20,7 +14,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test-main.js'
+        {pattern: 'js/**/*.spec.js', watched: false},
     ],
 
 
@@ -31,7 +25,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'test-main.js': ['webpack', 'sourcemap']
+        'js/**/*.js': ['webpack'],
     },
 
     webpack: webpackConfig,
@@ -45,10 +39,10 @@ module.exports = function(config) {
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
     reporters: ['progress'],
 
-    // coverageReporter: [
-    //     { type: 'text-summary' },
-    //     { type: 'html', dir: 'coverage' }
-    // ],
+    coverageReporter: [
+        { type: 'text-summary' },
+        { type: 'html', dir: 'coverage' }
+    ],
 
     // web server port
     port: 9876,

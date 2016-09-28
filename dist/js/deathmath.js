@@ -660,7 +660,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	      return _possibleConstructorReturn(_this);
 	    }
 
+	    // TODO: what is the advantage of using _cacheElements to create this reference
+	    // to the element?
 	    _this.el = el;
+
+	    _this._bindDismiss();
 	    _this._bindEventListenerCallbacks();
 	    _this._addEventListeners();
 	    _this._show();
@@ -677,21 +681,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  /**
-	   * Create bound versions of event listener callbacks and store them.
-	   * Otherwise we can't unbind from these events later because the
-	   * function signatures won't match.
+	   * Because we're calling the dismiss method from insise a timeout
+	   * we need to bind it to the Notification class context
 	   */
 
 
 	  _createClass(Notification, [{
-	    key: '_bindEventListenerCallbacks',
-	    value: function _bindEventListenerCallbacks() {
-	      this._onClickBound = this._onClick.bind(this);
+	    key: '_bindDismiss',
+	    value: function _bindDismiss() {
 	      this._dismissBound = this._dismiss.bind(this);
 	    }
 
 	    /**
-	     * Add event listeners for DOM events.
+	     * Create bound versions of event listener callbacks and store them.
+	     * Otherwise we can't unbind from these events later because the
+	     * function signatures won't match.
+	     */
+
+	  }, {
+	    key: '_bindEventListenerCallbacks',
+	    value: function _bindEventListenerCallbacks() {
+	      this._onClickBound = this._onClick.bind(this);
+	    }
+
+	    /**
+	     * Add event listeners for DOM events. Auto envoced by the base class on 
+	     * update and remove.
 	     */
 
 	  }, {
@@ -701,7 +716,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    /**
-	     * Remove event listeners for DOM events..
+	     * Remove event listeners for DOM events. Auto envoced by the base class on 
+	     * update and remove.
 	     */
 
 	  }, {
@@ -1781,9 +1797,139 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
 	var baseClassName = exports.baseClassName = 'notification-list__item';
-	var visibleClassName = exports.visibleClassName = 'notification-list__item--visible';
-		var animationTime = exports.animationTime = 300;
+	var visibleClassName = exports.visibleClassName = _get__('baseClassName') + '--visible';
+	var animationTime = exports.animationTime = 300;
+
+	var _RewiredData__ = Object.create(null);
+
+	var INTENTIONAL_UNDEFINED = '__INTENTIONAL_UNDEFINED__';
+	var _RewireAPI__ = {};
+
+	(function () {
+	  function addPropertyToAPIObject(name, value) {
+	    Object.defineProperty(_RewireAPI__, name, {
+	      value: value,
+	      enumerable: false,
+	      configurable: true
+	    });
+	  }
+
+	  addPropertyToAPIObject('__get__', _get__);
+	  addPropertyToAPIObject('__GetDependency__', _get__);
+	  addPropertyToAPIObject('__Rewire__', _set__);
+	  addPropertyToAPIObject('__set__', _set__);
+	  addPropertyToAPIObject('__reset__', _reset__);
+	  addPropertyToAPIObject('__ResetDependency__', _reset__);
+	  addPropertyToAPIObject('__with__', _with__);
+	})();
+
+	function _get__(variableName) {
+	  if (_RewiredData__ === undefined || _RewiredData__[variableName] === undefined) {
+	    return _get_original__(variableName);
+	  } else {
+	    var value = _RewiredData__[variableName];
+
+	    if (value === INTENTIONAL_UNDEFINED) {
+	      return undefined;
+	    } else {
+	      return value;
+	    }
+	  }
+	}
+
+	function _get_original__(variableName) {
+	  switch (variableName) {
+	    case 'baseClassName':
+	      return baseClassName;
+	  }
+
+	  return undefined;
+	}
+
+	function _assign__(variableName, value) {
+	  if (_RewiredData__ === undefined || _RewiredData__[variableName] === undefined) {
+	    return _set_original__(variableName, value);
+	  } else {
+	    return _RewiredData__[variableName] = value;
+	  }
+	}
+
+	function _set_original__(variableName, _value) {
+	  switch (variableName) {}
+
+	  return undefined;
+	}
+
+	function _update_operation__(operation, variableName, prefix) {
+	  var oldValue = _get__(variableName);
+
+	  var newValue = operation === '++' ? oldValue + 1 : oldValue - 1;
+
+	  _assign__(variableName, newValue);
+
+	  return prefix ? newValue : oldValue;
+	}
+
+	function _set__(variableName, value) {
+	  if ((typeof variableName === 'undefined' ? 'undefined' : _typeof(variableName)) === 'object') {
+	    Object.keys(variableName).forEach(function (name) {
+	      _RewiredData__[name] = variableName[name];
+	    });
+	  } else {
+	    if (value === undefined) {
+	      _RewiredData__[variableName] = INTENTIONAL_UNDEFINED;
+	    } else {
+	      _RewiredData__[variableName] = value;
+	    }
+
+	    return function () {
+	      _reset__(variableName);
+	    };
+	  }
+	}
+
+	function _reset__(variableName) {
+	  delete _RewiredData__[variableName];
+	}
+
+	function _with__(object) {
+	  var rewiredVariableNames = Object.keys(object);
+	  var previousValues = {};
+
+	  function reset() {
+	    rewiredVariableNames.forEach(function (variableName) {
+	      _RewiredData__[variableName] = previousValues[variableName];
+	    });
+	  }
+
+	  return function (callback) {
+	    rewiredVariableNames.forEach(function (variableName) {
+	      previousValues[variableName] = _RewiredData__[variableName];
+	      _RewiredData__[variableName] = object[variableName];
+	    });
+	    var result = callback();
+
+	    if (!!result && typeof result.then == 'function') {
+	      result.then(reset).catch(reset);
+	    } else {
+	      reset();
+	    }
+
+	    return result;
+	  };
+	}
+
+	exports.__get__ = _get__;
+	exports.__GetDependency__ = _get__;
+	exports.__Rewire__ = _set__;
+	exports.__set__ = _set__;
+	exports.__ResetDependency__ = _reset__;
+	exports.__RewireAPI__ = _RewireAPI__;
+	exports.default = _RewireAPI__;
 
 /***/ },
 /* 9 */
