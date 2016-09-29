@@ -1277,7 +1277,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Set parameters and cache elements.
 	   */
 	  function Base(el) {
-	    var params = arguments.length <= 1 || arguments[1] === undefined ? (++cov_q3h9eavxj.b[0][0], {}) : arguments[1];
+	    var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (++cov_q3h9eavxj.b[0][0], {});
 
 	    _classCallCheck(this, Base);
 
@@ -1353,7 +1353,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'update',
 	    value: function update(el) {
-	      var params = arguments.length <= 1 || arguments[1] === undefined ? (++cov_q3h9eavxj.b[9][0], {}) : arguments[1];
+	      var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (++cov_q3h9eavxj.b[9][0], {});
 	      ++cov_q3h9eavxj.f[3];
 	      ++cov_q3h9eavxj.s[13];
 
@@ -2670,7 +2670,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  function Notification(el) {
 	    var _this;
 
-	    var params = arguments.length <= 1 || arguments[1] === undefined ? (++cov_1nje7rexrt.b[0][0], {}) : arguments[1];
+	    var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (++cov_1nje7rexrt.b[0][0], {});
 
 	    _classCallCheck(this, Notification);
 
@@ -3848,7 +3848,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 	var cov_2fzuwwu3fs = function () {
 	  var path = '/Users/marksims/_clients/death-match/components/js/helpers/dom/has-class.js',

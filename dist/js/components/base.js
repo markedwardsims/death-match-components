@@ -1277,7 +1277,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	   * Set parameters and cache elements.
 	   */
 	  function Base(el) {
-	    var params = arguments.length <= 1 || arguments[1] === undefined ? (++cov_q3h9eavxj.b[0][0], {}) : arguments[1];
+	    var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (++cov_q3h9eavxj.b[0][0], {});
 
 	    _classCallCheck(this, Base);
 
@@ -1353,7 +1353,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }, {
 	    key: 'update',
 	    value: function update(el) {
-	      var params = arguments.length <= 1 || arguments[1] === undefined ? (++cov_q3h9eavxj.b[9][0], {}) : arguments[1];
+	      var params = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (++cov_q3h9eavxj.b[9][0], {});
 	      ++cov_q3h9eavxj.f[3];
 	      ++cov_q3h9eavxj.s[13];
 
