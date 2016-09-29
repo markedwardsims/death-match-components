@@ -4,7 +4,8 @@
   "description": "A library of component to build Deathmatch apps with",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "cd ./node_modules/zepto && npm install && MODULES=\"zepto\" npm run-script dist"
   },
   "repository": {
     "type": "git",
@@ -16,6 +17,9 @@
     "url": "https://github.com/markedwardsims/death-match-components/issues"
   },
   "homepage": "https://github.com/markedwardsims/death-match-components#readme",
+  "dependencies": {
+    "zepto": "https://github.com/madrobby/zepto/tarball/v1.2.0"
+  },
   "devDependencies": {
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
