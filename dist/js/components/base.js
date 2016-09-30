@@ -1470,16 +1470,13 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ function(module, exports) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;/* Zepto 1.2.0 - zepto - zeptojs.com/license */
-	(function(global, factory) {
-	  if (true)
-	    !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return factory(global) }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__))
-	  else
-	    factory(global)
-	}(this, function(window) {
-	  var Zepto = (function() {
+	//     Zepto.js
+	//     (c) 2010-2016 Thomas Fuchs
+	//     Zepto.js may be freely distributed under the MIT license.
+
+	var Zepto = (function() {
 	  var undefined, key, $, classList, emptyArray = [], concat = emptyArray.concat, filter = emptyArray.filter, slice = emptyArray.slice,
 	    document = window.document,
 	    elementDisplay = {}, classCache = {},
@@ -2412,10 +2409,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return $
 	})()
 
+	// If `$` is not yet defined, point it to `Zepto`
 	window.Zepto = Zepto
 	window.$ === undefined && (window.$ = Zepto)
-	  return Zepto
-	}))
 
 
 /***/ }
