@@ -11,13 +11,13 @@ $transition: opacity 300ms ease-in-out;
 }
 
 .notification-list__item {
-  transition: $transition;
   border: 1px solid;
   color: $white;
   list-style-type: none;
+  opacity: 0;
   padding: 10px;
   text-align: left;
-  opacity: 0;
+  transition: $transition;
 
   @include media-breakpoint-up('lg') {
     margin: 0 0 5px;

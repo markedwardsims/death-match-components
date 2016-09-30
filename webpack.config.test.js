@@ -16,7 +16,8 @@ module.exports = {
     resolve: {
         root: path.resolve(__dirname),
         alias: {
-            sinon: 'sinon/pkg/sinon'
+            sinon: 'sinon/pkg/sinon',
+            zepto: 'zepto/src/zepto'
         },
         extensions: extensions
     },
@@ -24,7 +25,9 @@ module.exports = {
         loaders: [
             jsLoader
         ],
-        noParse: [ /node_modules\/sinon\// ]
+        noParse: [ 
+            /node_modules\/sinon\//
+        ]
     },
     devtool: 'cheap-module-source-map'
 };

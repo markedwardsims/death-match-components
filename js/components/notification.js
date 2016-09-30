@@ -12,8 +12,7 @@
  */
 
 import Base from './base.js';
-import addClass from '../helpers/dom/add-class.js';
-import removeClass from '../helpers/dom/remove-class.js';
+import 'zepto';
 import { baseClassName, visibleClassName, animationTime } from '../config/notification.js';
 
 const noop = () => {};
@@ -43,7 +42,7 @@ class Notification extends Base {
     this._show();
 
     if(params.theme) {
-      addClass(this.el, baseClassName + '--' + params.theme);
+      $(this.el).addClass(baseClassName + '--' + params.theme);
     }
 
     if(params.autoDismissTimeout) {
@@ -108,14 +107,14 @@ class Notification extends Base {
    * Show
    */
   _show() {
-    addClass(this.el, visibleClassName);
+    $(this.el).addClass(visibleClassName);
   }
 
   /**
    * Hide
    */
   _hide() {
-    removeClass(this.el, visibleClassName);
+    $(this.el).removeClass(visibleClassName);
   }
 
 }

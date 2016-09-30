@@ -877,13 +877,13 @@
     z-index: 1; } }
 
 .notification-list__item {
-  transition: opacity 300ms ease-in-out;
   border: 1px solid;
   color: #fff;
   list-style-type: none;
+  opacity: 0;
   padding: 10px;
   text-align: left;
-  opacity: 0; }
+  transition: opacity 300ms ease-in-out; }
   @media (min-width: 1048px) {
     .notification-list__item {
       margin: 0 0 5px; } }

@@ -9,7 +9,7 @@
  * @module components/base.js
  */
 
-import each from '../helpers/util/each';
+import 'zepto';
 
 const noop = function() {};
 
@@ -82,7 +82,7 @@ class Base {
    */
   setParams(params, force) {
 
-    each(params, (k, v) => {
+    $.each(params, (k, v) => {
       if (this._whitelistedParams.indexOf(k) !== -1 || force) {
         this[k] = v;
       }
@@ -101,7 +101,7 @@ class Base {
 
     keys = keys instanceof Array ? keys : Object.keys(keys);
     scope = scope || this;
-    each(keys, (k) => {
+    $.each(keys, (k) => {
       delete scope[k];
     });
 
