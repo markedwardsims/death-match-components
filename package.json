@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "cd node_modules/zepto && ls -lah"
+    "postinstall": "ls -lah && cd /node_modules/zepto && ls -lah"
   },
   "repository": {
     "type": "git",
