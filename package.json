@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "zepto MODULES=\"zepto\" dist"
+    "postinstall": "MODULES=\"zepto\" npm run-script zepto dist"
   },
   "repository": {
     "type": "git",
