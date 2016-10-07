@@ -13,12 +13,12 @@
 .warrior {
   transition: background-color .25s ease-in-out;
   background-color: #cfcfcf;
-  height: 50px;
-  width: 50px; }
+  height: auto;
+  width: 100%; }
   .warrior:hover {
     transition: background-color .25s ease-in-out;
     background-color: #9c9c9c; }
 
-.warrior--large {
-  height: 230px;
-  width: 230px; }
+.warrior--small {
+  height: 50px;
+  width: 50px; }
