@@ -48,7 +48,10 @@
     background-color: #4a575e; }
 
 .table__cell {
-  padding: 10px 15px; }
+  padding: 10px 10px; }
+  @media (min-width: 796px) {
+    .table__cell {
+      padding: 10px 20px; } }
 
 .text-right {
   text-align: right; }
@@ -940,13 +943,14 @@
   background-color: #4a4a4a;
   color: #fff;
   font-size: 18px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-left: auto;
   margin-right: auto;
   padding: 10px;
   width: 270px; }
   @media (min-width: 796px) {
     .warrior-detail {
+      margin-bottom: 20px;
       padding: 20px; } }
 
 @media (min-width: 796px) {

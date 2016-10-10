@@ -2,13 +2,14 @@
   background-color: $medium-dark-grey;
   color: $white;
   font-size: 18px;
-  margin-bottom: $gutter-size;
+  margin-bottom: $gutter-size / 2;
   margin-left: auto;
   margin-right: auto;
   padding: $gutter-size / 2;
   width: $warrior-detail-width;
 
   @include media-breakpoint-up('md') {
+    margin-bottom: $gutter-size;
     padding: $gutter-size;
   }
 
