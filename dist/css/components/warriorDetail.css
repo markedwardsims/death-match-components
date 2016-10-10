@@ -7,7 +7,8 @@
   margin: 0;
   padding: 0; }
 
-.clearfix, .warrior-detail__caption {
+.clearfix,
+.warrior-detail__caption {
   overflow: hidden; }
 
 .warrior-detail {
@@ -17,15 +18,22 @@
   margin-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
-  padding: 20px;
+  padding: 10px;
   width: 270px; }
+  @media (min-width: 796px) {
+    .warrior-detail {
+      padding: 20px; } }
 
-.warrior-detail__caption {
-  padding-top: 14px; }
+@media (min-width: 796px) {
+  .warrior-detail__caption {
+    padding-top: 14px; } }
 
 .warrior-detail__name {
-  float: left;
   font-style: italic; }
+  @media (min-width: 796px) {
+    .warrior-detail__name {
+      float: left; } }
 
-.warrior-detail__wins {
-  float: right; }
+@media (min-width: 796px) {
+  .warrior-detail__wins {
+    float: right; } }

@@ -5,20 +5,34 @@
   margin-bottom: $gutter-size;
   margin-left: auto;
   margin-right: auto;
-  padding: $gutter-size;
+  padding: $gutter-size / 2;
   width: $warrior-detail-width;
+
+  @include media-breakpoint-up('md') {
+    padding: $gutter-size;
+  }
+
 }
 
 .warrior-detail__caption {
   @extend %clearfix;
-  padding-top: 14px;
+
+  @include media-breakpoint-up('md') {
+    padding-top: 14px;
+  }
 }
 
 .warrior-detail__name {
-  float: left;
   font-style: italic;
+
+  @include media-breakpoint-up('md') {
+    float: left;
+  }
+
 }
 
 .warrior-detail__wins {
-  float: right;
+  @include media-breakpoint-up('md') {
+    float: right;
+  }
 }
