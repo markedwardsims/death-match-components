@@ -23,7 +23,7 @@
 }
 
 .table__cell {
-  padding: ($gutter-size / 2) ($gutter-size / 2);
+  padding: ($gutter-size / 2);
 
   @include media-breakpoint-up('md') {
     padding: ($gutter-size / 2) $gutter-size;

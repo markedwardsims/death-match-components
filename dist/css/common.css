@@ -47,7 +47,7 @@
     background-color: #4a575e; }
 
 .table__cell {
-  padding: 10px 10px; }
+  padding: 10px; }
   @media (min-width: 796px) {
     .table__cell {
       padding: 10px 20px; } }

@@ -16,6 +16,11 @@ gulp.task('clean:dist:js', function () {
         .pipe(clean());
 });
 
+gulp.task('clean:dist:icons', function () {
+    return gulp.src('dist/icons')
+        .pipe(clean());
+});
+
 gulp.task('clean:coverage', function () {
     return gulp.src('coverage')
         .pipe(clean());

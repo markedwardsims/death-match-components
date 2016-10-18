@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="38px" height="38px" viewBox="0 0 38 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.2 (33826) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-success</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop" transform="translate(-389.000000, -149.000000)" stroke="#FFFFFF">
+            <g id="icons" transform="translate(390.000000, 150.000000)">
+                <g id="icon-success">
+                    <circle id="background" fill="#7CCF21" cx="18" cy="18" r="18"></circle>
+                    <g id="thumbs-up" transform="translate(9.000000, 9.000000)">
+                        <path d="M1.62758458,16.1015069 C1.88589271,17.2184421 2.88042402,18.0005667 4.02616009,18.0005667 L12.59983,18.0005667 L12.59983,7.21912726 L11.0526813,1.64255171 C10.9077767,0.697521959 10.0941511,0 9.137421,0 C8.06728731,0 7.19966,0.867627314 7.19966,1.937761 L7.19966,7.20022667 L2.46281088,7.20022667 C0.879661038,7.20022667 -0.292175853,8.67717316 0.0642353675,10.2198217 L1.62758458,16.1015069 L1.62758458,16.1015069 Z" id="Path"></path>
+                        <polygon id="Path" points="18 18.0005667 14.3998867 18.0005667 14.3998867 7.20022667 18 7.20022667"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
