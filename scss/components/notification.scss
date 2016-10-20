@@ -50,7 +50,7 @@ $transition: opacity 300ms ease-in-out;
   background-color: $success-green;
 
   &:before {
-    background: url('../../../dist/icons/icon-success.svg') no-repeat top left;
+    background: url('#{$icon-directory}/icon-success.svg') no-repeat top left;
   }
 }
 
@@ -58,7 +58,7 @@ $transition: opacity 300ms ease-in-out;
   background-color: $warning-orange;
 
   &:before {
-    background: url('../../../dist/icons/icon-warning.svg') no-repeat top left;
+    background: url('#{$icon-directory}/icon-warning.svg') no-repeat top left;
   }
 }
 
@@ -66,7 +66,7 @@ $transition: opacity 300ms ease-in-out;
   background-color: $error-red;
 
   &:before {
-    background: url('../../../dist/icons/icon-error.svg') no-repeat top left;
+    background: url('#{$icon-directory}/icon-error.svg') no-repeat top left;
   }
 }
 
@@ -74,6 +74,6 @@ $transition: opacity 300ms ease-in-out;
   background-color: $chuck-grey;
 
   &:before {
-    background: url('../../../dist/icons/icon-chuck.svg') no-repeat top left;
+    background: url('#{$icon-directory}/icon-chuck.svg') no-repeat top left;
   }
 }

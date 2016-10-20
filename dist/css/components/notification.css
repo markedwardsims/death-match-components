@@ -50,19 +50,19 @@
 .notification-list__item--success {
   background-color: #6cb31f; }
   .notification-list__item--success:before {
-    background: url("../../../dist/icons/icon-success.svg") no-repeat top left; }
+    background: url("../../icons/icon-success.svg") no-repeat top left; }
 
 .notification-list__item--warning {
   background-color: #ee9d18; }
   .notification-list__item--warning:before {
-    background: url("../../../dist/icons/icon-warning.svg") no-repeat top left; }
+    background: url("../../icons/icon-warning.svg") no-repeat top left; }
 
 .notification-list__item--error {
   background-color: #d0021b; }
   .notification-list__item--error:before {
-    background: url("../../../dist/icons/icon-error.svg") no-repeat top left; }
+    background: url("../../icons/icon-error.svg") no-repeat top left; }
 
 .notification-list__item--chuck {
   background-color: #4a4a4a; }
   .notification-list__item--chuck:before {
-    background: url("../../../dist/icons/icon-chuck.svg") no-repeat top left; }
+    background: url("../../icons/icon-chuck.svg") no-repeat top left; }

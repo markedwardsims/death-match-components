@@ -9,7 +9,7 @@ const config = {
     ]
 };
 
-gulp.task('icons', function() {
+gulp.task('icons:build', function() {
     return gulp.src('icons/src/*.svg')
         .pipe(svgMin(config))
         .pipe(gulp.dest('dist/icons'));

@@ -11,6 +11,7 @@ gulp.task('build', function(done) {
 			'lint:js'
 		],
 		[
+			'icons:build',
 			'scss:build:minify',
 			'js:build:minify'
 		],
