@@ -12,8 +12,8 @@ gulp.task('build', function(done) {
 		],
 		[
 			'icons:build',
-			'scss:build:minify',
-			'js:build:minify'
+			'scss:build',
+			'js:build'
 		],
 		done
 	);

@@ -39,44 +39,27 @@ function scss(files, out, options) {
     return es.merge(streams);
 }
 
+const prependScssFiles = [
+    '@import "./src/common/variables";',
+    '@import "./src/common/mixins/index";',
+    '@import "./src/common/helpers/clearfix";',
+    '@import "./src/common/grid/mixins/breakpoints";'
+];
+
 gulp.task('scss:components', function() {
-    return scss(['./scss/components/**/*.scss'], 'dist/css/components', {
-        prepends: [
-            '@import "../variables";',
-            '@import "../config/index";',
-            '@import "../helpers/index";',
-            '@import "../mixins/index";'
-        ]
+    return scss(['./src/components/**/*.scss'], 'dist', {
+        prepends: prependScssFiles
     });
 });
 
 gulp.task('scss:common', function() {
-    return scss(['./scss/common/index.scss'], 'dist/css', {
-        name: 'common',
-        prepends: [
-            '@import "../variables";',
-            '@import "../config/index";',
-            '@import "../helpers/index";',
-            '@import "../mixins/index";'
-        ]
+    return scss(['./src/common/common.scss'], 'dist', {
+        name: 'deathmatch.common',
+        prepends: prependScssFiles
     });
-});
-
-gulp.task('scss:all', function() {
-    return scss(['./scss/deathmatch.scss'], 'dist/css');
 });
 
 gulp.task('scss:build', [
     'scss:components',
-    'scss:common',
-    'scss:all'
+    'scss:common'
 ]);
-
-gulp.task('scss:build:minify', ['scss:build'], function() {
-    return gulp.src('dist/**/*.css')
-        .pipe(cleanCSS())
-        .pipe(rename({
-            suffix: '.min'
-        }))
-        .pipe(gulp.dest('dist'));
-});
