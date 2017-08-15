@@ -10,7 +10,7 @@ const config = {
 };
 
 gulp.task('icons:build', function() {
-    return gulp.src('icons/src/*.svg')
+    return gulp.src('src/components/icons/*.svg')
         .pipe(svgMin(config))
         .pipe(gulp.dest('dist/icons'));
 });
