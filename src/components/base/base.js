@@ -9,8 +9,6 @@
  * @module components/base.js
  */
 
-import 'zepto';
-
 const noop = function() {};
 
 class Base {
@@ -82,11 +80,11 @@ class Base {
    */
   setParams(params, force) {
 
-    $.each(params, (k, v) => {
-      if (this._whitelistedParams.indexOf(k) !== -1 || force) {
-        this[k] = v;
+    for (var property in params) {
+      if (this._whitelistedParams.indexOf(property) !== -1 || force) {
+        this[property] = params[property];
       }
-    });
+    }
 
     return this;
   }
@@ -101,9 +99,10 @@ class Base {
 
     keys = keys instanceof Array ? keys : Object.keys(keys);
     scope = scope || this;
-    $.each(keys, (k) => {
-      delete scope[k];
-    });
+
+    for (var property in keys) {
+      delete scope[property];
+    }
 
     return this;
   }

@@ -1,74 +1,69 @@
-import { expect } from 'chai';
+import test from 'ava';
 import sinon from 'sinon';
 import Notification from '../notification.js';
 import { baseClassName, visibleClassName, animationTime } from '../config/notification.js';
-import 'zepto';
 
-describe('the Notification component', function() {
+let clock = undefined;
 
-	let clock = undefined;
+test.beforeEach(t => {
+    clock = sinon.useFakeTimers();
+});
 
-	before(() => {
-		clock = sinon.useFakeTimers();
+test.afterEach(t => {
+    clock.restore();
+});
+
+test('should add the visible class when instantiated', t => {
+	let el = document.createElement("div");
+	new Notification(el);
+	t.true(el.classList.contains(visibleClassName));
+});
+
+test('should remove itself on click', t => {
+	let parent = document.createElement("div");
+	let el = document.createElement("div");
+	parent.appendChild(el);
+	new Notification(el);
+	el.click();
+	clock.tick(animationTime);
+	t.true(parent.childElementCount === 0);
+});
+
+test('should remove the visible class on click', t => {
+	let el = document.createElement("div");
+	new Notification(el);
+	el.click();
+	t.false(el.classList.contains(visibleClassName))
+});
+
+test('should call the onAfterClick callback on click', t => {
+	let el = document.createElement("div");
+	let handler = sinon.spy();
+	new Notification(el, {
+		onAfterClick: handler
 	});
+	el.click();
+    clock.tick(animationTime);
+	t.true(handler.called);
+});
 
-	after(() => {
-		clock.restore();
+test('should auto dismiss if the autoDismissTimeout parameter is provided', t => {
+	let autoDismissTimeout = 500;
+	let parent = document.createElement("div");
+	let el = document.createElement("div");
+	parent.appendChild(el);
+	new Notification(el, {
+		autoDismissTimeout: autoDismissTimeout
 	});
+    clock.tick(animationTime + autoDismissTimeout);
+	t.true(parent.childElementCount === 0);
+});
 
-	it('should add the visible class when instantiated', () => {
-		let el = document.createElement("div");
-		let component = new Notification(el);
-		expect($(el).hasClass(visibleClassName)).to.eql(true);
+test('should add a theme class if provided', t => {
+	let el = document.createElement("div");
+	let theme = 'foo';
+	new Notification(el, {
+		theme: theme
 	});
-
-	it('should remove itself on click', () => {
-		let parent = document.createElement("div");
-		let el = document.createElement("div");
-		parent.appendChild(el);
-		let component = new Notification(el);
-		el.click();
-		clock.tick(animationTime);
-		expect(parent.childElementCount).to.eql(0);
-	});
-
-	it('should remove the visible class on click', () => {
-		let el = document.createElement("div");
-		let component = new Notification(el);
-		el.click();
-		expect($(el).hasClass(visibleClassName)).to.eql(false);
-	});
-
-	it('should call the onAfterClick callback on click', () => {
-		let el = document.createElement("div");
-		let handler = sinon.spy();
-		let component = new Notification(el, {
-			onAfterClick: handler
-		});
-		el.click();
-		clock.tick(animationTime);
-		expect(handler.called).to.eql(true);
-	});
-
-	it('should auto dismiss if the autoDismissTimeout parameter is provided', () => {
-		let autoDismissTimeout = 5000;
-		let parent = document.createElement("div");
-		let el = document.createElement("div");
-		parent.appendChild(el);
-		let component = new Notification(el, {
-			autoDismissTimeout: autoDismissTimeout
-		});
-		clock.tick(animationTime + autoDismissTimeout);
-		expect(parent.childElementCount).to.eql(0);
-	});
-
-	it('should add a theme class if provided', () => {
-		let el = document.createElement("div");
-		let theme = 'foo';
-		let component = new Notification(el, {
-			theme: theme
-		});
-		expect($(el).hasClass(baseClassName + '--foo')).to.eql(true);
-	})
-
+	t.true(el.classList.contains(baseClassName + '--foo'))
 });
