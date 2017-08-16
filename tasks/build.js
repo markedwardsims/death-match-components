@@ -8,6 +8,7 @@ gulp.task('build', function(done) {
 	if (process.env.NODE_ENV === 'production') { tasks.push(['quality']); }
 	tasks.push([ 'clean' ]);
 	tasks.push([ 'compile' ]);
+	tasks.push([ 'distribution' ]);
 	tasks.push(done);
 	runSequence.apply(null,tasks);
 });
