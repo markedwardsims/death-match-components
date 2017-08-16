@@ -109,7 +109,7 @@ gulp.task('scss:components', function() {
 });
 
 gulp.task('scss:common', function() {
-    return scss(['./src/common/common.scss'], 'dist/components', {
+    return scss(['./src/common/common.scss'], 'dist/common', {
         name: 'deathmatch.common',
         prepends: prependScssFiles
     });
