@@ -1,7 +1,5 @@
 require('./build.js');
 require('./clean.js');
-require('./js.js');
-require('./scss.js');
-require('./lint.js');
-require('./test.js');
-require('./icons.js');
+require('./compile.js');
+require('./quality.js');
+require('./distribution.js');
