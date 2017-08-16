@@ -1,20 +1,13 @@
 const gulp = require('gulp');
 const runSequence = require('run-sequence');
 
+process.env.NODE_ENV = process.env.NODE_ENV || 'production';
+
 gulp.task('build', function(done) {
-	runSequence(
-		'test',
-		'clean:coverage',
-		'clean:dist',
-		[
-			'lint:scss',
-			'lint:js'
-		],
-		[
-			'icons:build',
-			'scss:build',
-			'js:build'
-		],
-		done
-	);
+	let tasks = [];
+	if (process.env.NODE_ENV === 'production') { tasks.push(['quality']); }
+	tasks.push([ 'clean' ]);
+	tasks.push([ 'compile' ]);
+	tasks.push(done);
+	runSequence.apply(null,tasks);
 });
