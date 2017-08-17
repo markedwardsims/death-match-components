@@ -2,8 +2,8 @@ const gulp = require('gulp');
 const scsslint = require('gulp-scss-lint');
 const jshint = require('gulp-jshint');
 const stylish = require('jshint-stylish');
-const Server = require('karma').Server;
-const path = require('path');
+const ava = require('gulp-ava');
+
 
 // ==== LINTING ====
 
@@ -27,13 +27,13 @@ gulp.task('lint:js', function() {
 
 // ==== TESTING ====
 
-gulp.task('test', function(done) {
-    new Server({
-        configFile: path.resolve(__dirname, '../') + '/karma.conf.js',
-        singleRun: true
-    }, done).start();
+gulp.task('test', function() {
+    return gulp.src('test.js')
+        .pipe(ava({
+            verbose: true,
+            nyc: true
+        }));
 });
-
 
 
 gulp.task('quality', [

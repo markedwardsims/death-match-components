@@ -1,114 +1,100 @@
-/**
- * # Base Component
- * The base class for Spark JS components. This class should never be
- * instantiated directly.
- *
- * @param {Element} el
- * @param {Object} params
- *
- * @module components/base.js
- */
-
-import 'zepto';
-
-const noop = function() {};
+import events from 'events-mixin';
 
 class Base {
 
-  /**
-   * Set parameters and cache elements.
-   */
-  constructor(el, params = {}) {
+    /**
+     * Set parameters and cache elements.
+     */
+    constructor(params = {}) {
 
-    if (params.elRequired && !el) {
-      return;
+        this._requiredParams.forEach(function (key) {
+            if (params[key] === undefined) {
+                throw Error('Required parameters error. Missing parameter: ' + key);
+            }
+        });
+
+        this._setParams(this.defaults || {}, true);
+        this._setParams(params);
+
+        this._bindEvents();
     }
 
-    this.setParams(this.defaults || {}, true);
-    this.setParams(params);
-    (this._cacheElements || noop).call(this, el, params);
-    (this._parseParams || noop).call(this);
-  }
 
+    /**
+     * Remove the component from the DOM and prepare for garbage collection by dereferencing values.
+     * @param {Boolean} leaveElement Leave the element intact.
+     */
+    remove(leaveElement) {
 
-  /**
-   * Remove the component from the DOM and prepare for garbage collection by dereferencing values.
-   * @param {Boolean} leaveElement Leave the element intact.
-   */
-  remove(leaveElement) {
+        if (!leaveElement && this.el && this.el.parentNode) {
+            this.el.parentNode.removeChild(this.el);
+        }
 
-    if (this._removeEventListeners) {
-      this._removeEventListeners();
+        this._unsetParams();
+        this._unbindEvents();
+
+        return this;
     }
 
-    if (!leaveElement && this.el && this.el.parentNode) {
-      this.el.parentNode.removeChild(this.el);
+    /**
+     * Set a hash of parameters if they're whitelisted or we're told to force the set.
+     * This is used to set initial values as well as set passed parameters.
+     * @param {Object} params
+     * @param {Boolean} force Force setting even if the param is not whitelisted.
+     */
+    _setParams(params, force) {
+
+        for (var property in params) {
+            if (this._whitelistedParams.indexOf(property) !== -1 || this._requiredParams.indexOf(property) !== -1 || force) {
+                this[property] = params[property];
+            }
+        }
+
+        return this;
     }
 
-    this.unsetParams(this.defaults);
 
-    return this;
-  }
+    /**
+     * Unset all parameters.
+     * @private
+     */
+    _unsetParams() {
 
+        for (var property in this) {
+            delete this[property];
+        }
 
-  /**
-   * Update the component to use a new element or reparse from
-   * the existing element.
-   * @param {Element} el Optional
-   * @param {Object} params Optional
-   */
-  update(el, params = {}) {
-
-    if (this._removeEventListeners) {
-      this._removeEventListeners();
+        return this;
     }
 
-    (this._cacheElements || noop).call(this, el || this.el, params);
-    (this._parseParams || noop).call(this);
-
-    if (this._addEventListeners) {
-      this._addEventListeners();
+    /**
+     *
+     * @private
+     */
+    _bindEvents() {
+        if (this.el && this._events) {
+            this.events = events(this.el, this);
+            for (var property in this._events) {
+                this.events.bind(property, this[this._events[property]]);
+            }
+        }
     }
 
-    return this;
-  }
+    /**
+     *
+     * @private
+     */
+    _unbindEvents() {
+        if(this.events) {
+            this.events.unbind();
+        }
+    }
 
-
-  /**
-   * Set a hash of parameters if they're whitelisted or we're told to force the set.
-   * This is used to set initial values as well as set passed parameters.
-   * @param {Object} params
-   * @param {Boolean} force Force setting even if the param is not whitelisted.
-   */
-  setParams(params, force) {
-
-    $.each(params, (k, v) => {
-      if (this._whitelistedParams.indexOf(k) !== -1 || force) {
-        this[k] = v;
-      }
-    });
-
-    return this;
-  }
-
-
-  /**
-   * Unset all parameters.
-   * @param {Array|Object} keys
-   * @param {Object} scope The object to unset the params from. Defaults to `this`.
-   */
-  unsetParams(keys, scope) {
-
-    keys = keys instanceof Array ? keys : Object.keys(keys);
-    scope = scope || this;
-    $.each(keys, (k) => {
-      delete scope[k];
-    });
-
-    return this;
-  }
 }
 
+
+Base.prototype._requiredParams = [];
+Base.prototype._events = {};
 
 /**
  * Whitelisted parameters which can be set on construction.
