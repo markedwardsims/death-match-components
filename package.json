@@ -12,12 +12,14 @@
     ]
   },
   "babel": {
-    "presets": [
-      "@ava/stage-4"
-    ],
     "env": {
       "development": {
         "sourceMaps": "inline"
+      },
+      "test": {
+        "presets": [
+          "@ava/stage-4"
+        ]
       }
     }
   },
@@ -50,7 +52,7 @@
     }
   },
   "scripts": {
-    "test": "nyc ava --verbose --watch"
+    "test": "NODE_ENV=test nyc ava --verbose --watch"
   },
   "repository": {
     "type": "git",
@@ -63,6 +65,7 @@
   },
   "homepage": "https://github.com/markedwardsims/death-match-components#readme",
   "devDependencies": {
+    "@ava/babel-preset-stage-4": "^1.1.0",
     "ava": "^0.22.0",
     "babel-core": "^6.9.1",
     "babel-loader": "^6.2.4",
