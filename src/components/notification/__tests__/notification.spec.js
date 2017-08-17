@@ -15,7 +15,9 @@ test.afterEach(t => {
 
 test('should add the visible class when instantiated', t => {
 	let el = document.createElement("div");
-	new Notification(el);
+	new Notification({
+		el
+    });
 	t.true(el.classList.contains(visibleClassName));
 });
 
@@ -23,7 +25,9 @@ test('should remove itself on click', t => {
 	let parent = document.createElement("div");
 	let el = document.createElement("div");
 	parent.appendChild(el);
-	new Notification(el);
+	new Notification({
+		el
+    });
 	el.click();
 	clock.tick(animationTime);
 	t.true(parent.childElementCount === 0);
@@ -31,7 +35,9 @@ test('should remove itself on click', t => {
 
 test('should remove the visible class on click', t => {
 	let el = document.createElement("div");
-	new Notification(el);
+	new Notification({
+		el
+    });
 	el.click();
 	t.false(el.classList.contains(visibleClassName))
 });
@@ -39,7 +45,8 @@ test('should remove the visible class on click', t => {
 test('should call the onAfterClick callback on click', t => {
 	let el = document.createElement("div");
 	let handler = sinon.spy();
-	new Notification(el, {
+	new Notification({
+		el,
 		onAfterClick: handler
 	});
 	el.click();
@@ -52,7 +59,8 @@ test('should auto dismiss if the autoDismissTimeout parameter is provided', t =>
 	let parent = document.createElement("div");
 	let el = document.createElement("div");
 	parent.appendChild(el);
-	new Notification(el, {
+	new Notification({
+		el,
 		autoDismissTimeout: autoDismissTimeout
 	});
     clock.tick(animationTime + autoDismissTimeout);
@@ -62,7 +70,8 @@ test('should auto dismiss if the autoDismissTimeout parameter is provided', t =>
 test('should add a theme class if provided', t => {
 	let el = document.createElement("div");
 	let theme = 'foo';
-	new Notification(el, {
+	new Notification({
+		el,
 		theme: theme
 	});
 	t.true(el.classList.contains(baseClassName + '--foo'))

@@ -50,7 +50,7 @@
     }
   },
   "scripts": {
-    "test": "nyc ava --verbose"
+    "test": "nyc ava --verbose --watch"
   },
   "repository": {
     "type": "git",
@@ -96,5 +96,8 @@
     "run-sequence": "^1.2.2",
     "sinon": "^2.0.0-pre",
     "webpack": "^1.13.2"
+  },
+  "dependencies": {
+    "events-mixin": "^1.3.0"
   }
 }
