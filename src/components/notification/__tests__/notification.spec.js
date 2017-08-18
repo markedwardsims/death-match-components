@@ -5,11 +5,11 @@ import { baseClassName, visibleClassName, animationTime } from '../config/notifi
 
 let clock = undefined;
 
-test.beforeEach(t => {
+test.beforeEach( () => {
     clock = sinon.useFakeTimers();
 });
 
-test.afterEach(t => {
+test.afterEach( () => {
     clock.restore();
 });
 
@@ -39,7 +39,7 @@ test('should remove the visible class on click', t => {
 		el
     });
 	el.click();
-	t.false(el.classList.contains(visibleClassName))
+	t.false(el.classList.contains(visibleClassName));
 });
 
 test('should call the onAfterClick callback on click', t => {
@@ -74,5 +74,5 @@ test('should add a theme class if provided', t => {
 		el,
 		theme: theme
 	});
-	t.true(el.classList.contains(baseClassName + '--foo'))
+	t.true(el.classList.contains(baseClassName + '--foo'));
 });

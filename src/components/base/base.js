@@ -3,7 +3,9 @@ import events from 'events-mixin';
 class Base {
 
     /**
-     * Set parameters and cache elements.
+     * The Base class contructor
+     * @param {Object} params The parameters/options object
+     *
      */
     constructor(params = {}) {
 
@@ -23,6 +25,7 @@ class Base {
     /**
      * Remove the component from the DOM and prepare for garbage collection by dereferencing values.
      * @param {Boolean} leaveElement Leave the element intact.
+     * @returns {Object} the class instance
      */
     remove(leaveElement) {
 
@@ -39,8 +42,10 @@ class Base {
     /**
      * Set a hash of parameters if they're whitelisted or we're told to force the set.
      * This is used to set initial values as well as set passed parameters.
-     * @param {Object} params
-     * @param {Boolean} force Force setting even if the param is not whitelisted.
+     * @private
+     * @param {Object} params the parameters to add to the instance
+     * @param {Boolean} force Force setting parameters even if the parameter is not whitelisted.
+     * @returns {Object} the class instance
      */
     _setParams(params, force) {
 
@@ -57,48 +62,68 @@ class Base {
     /**
      * Unset all parameters.
      * @private
+     * @returns {Object} the class instance
      */
     _unsetParams() {
 
-        for (var property in this) {
-            delete this[property];
+        for (let property in this) {
+            if (this.hasOwnProperty(property)) {
+                delete this[property];
+            }
         }
 
         return this;
     }
 
     /**
-     *
+     * Bind the DOM events provided in the config
      * @private
+     * @returns {Object} the class instance
      */
     _bindEvents() {
         if (this.el && this._events) {
             this.events = events(this.el, this);
-            for (var property in this._events) {
-                this.events.bind(property, this[this._events[property]]);
+            for (let property in this._events) {
+                if (this._events.hasOwnProperty(property)) {
+                    this.events.bind(property, this[this._events[property]]);
+                }
             }
         }
+        return this;
     }
 
     /**
-     *
+     * Unbind the DOM events
      * @private
+     * @returns {Object} the class instance
      */
     _unbindEvents() {
         if(this.events) {
             this.events.unbind();
         }
+        return this;
     }
 
 }
 
-
+/**
+ * The required parameters list
+ * @type {Array}
+ * @private
+ */
 Base.prototype._requiredParams = [];
+
+/**
+ * The events object in key (event name) and value (function name string) format
+ * @type {Object}
+ * @private
+ */
 Base.prototype._events = {};
 
 /**
- * Whitelisted parameters which can be set on construction.
+ * The whitelisted parameters which can be set on construction
  * @type {Array}
+ * @private
  */
 Base.prototype._whitelistedParams = [];
 

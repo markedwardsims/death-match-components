@@ -1,27 +1,14 @@
-/**
- * # Notification
- * A notification element that is removed from DOM on click.
- *
- * @example
- * new Notification({
- *   el,
- *   onAfterClick: handlerFunction,
- *   autoDismissTimeout: 5000
- * });
- *
- * @module components/notification.js
- */
-
 import Base from '../base/base.js';
 import {baseClassName, visibleClassName, animationTime} from './config/notification.js';
-
-const noop = () => {};
 
 class Notification extends Base {
 
     /**
-     * Expand constructor.
-     * @param {Object} params
+     * The Notification constructor
+     * @param {Object} params the parameters to add to the instance
+     * @param {Element} params.el (Required) The DOM element to use
+     * @param {Function} params.onAfterClick (Optional) The function to invoke after clicking on the notification element
+     * @param {Number} params.autoDismissTimeout (Optional) The number in milliseconds to wait before auto-dismissing the notification
      */
     constructor(params = {}) {
         super(params);
@@ -42,32 +29,35 @@ class Notification extends Base {
 
     /**
      * When we are clicked, dismiss the notification.
-     * @param {Object} e
+     * @private
      */
-    _onClick(e) {
+    _onClick() {
         this._boundDismiss();
     }
 
     /**
-     * Dismiss
+     * Dismiss the notification
+     * @private
      */
     _dismiss() {
         this._hide();
         // delay the click callback by the length of the fade transition
         // TODO: having the animation time in css AND js doesn't feel good
-        setTimeout((this.onAfterClick || noop), animationTime);
+        setTimeout((this.onAfterClick || function() {}), animationTime);
         setTimeout(this.remove.bind(this), animationTime);
     }
 
     /**
-     * Show
+     * Show the notification
+     * @private
      */
     _show() {
         this.el.classList.add(visibleClassName);
     }
 
     /**
-     * Hide
+     * Hide the notification
+     * @private
      */
     _hide() {
         this.el.classList.remove(visibleClassName);
@@ -81,22 +71,11 @@ Notification.prototype._events = {
 
 Notification.prototype._requiredParams = ['el'];
 
-/**
- * Whitelisted parameters which can be set on construction.
- * @type {Array}
- */
 Notification.prototype._whitelistedParams = [
     'onAfterClick',
     'autoDismissTimeout'
 ];
 
-
-/**
- * Default values for internal properties we will be setting.
- * These are set on each construction so we don't leak properties
- * into the prototype chain.
- * @type {Object}
- */
 Notification.prototype.defaults = {
     onAfterClick: null,
     autoDismissTimeout: false
