@@ -1,0 +1,42 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": "eslint:recommended",
+  "rules": {
+    "semi": 1,
+    "no-alert": 0,
+    "no-bitwise": 0,
+    "camelcase": 1,
+    "curly": 1,
+    "eqeqeq": 0,
+    "no-eq-null": 0,
+    "guard-for-in": 1,
+    "no-empty": 1,
+    "no-console": [
+      "warn",
+      { "allow": ["warn", "error"] }
+    ],
+    "valid-jsdoc": ["error", {
+      "requireReturn": false
+    }],
+    "require-jsdoc": ["error", {
+      "require": {
+        "FunctionDeclaration": true,
+        "MethodDefinition": true,
+        "ClassDeclaration": false,
+        "ArrowFunctionExpression": true
+      }
+    }]
+  },
+  "globals": {},
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true
+  }
+}

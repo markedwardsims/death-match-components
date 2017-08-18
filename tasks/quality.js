@@ -1,8 +1,7 @@
 const gulp = require('gulp');
 const scsslint = require('gulp-scss-lint');
-const jshint = require('gulp-jshint');
-const stylish = require('jshint-stylish');
 const ava = require('gulp-ava');
+const eslint = require('gulp-eslint');
 
 
 // ==== LINTING ====
@@ -15,14 +14,10 @@ gulp.task('lint:scss', function() {
 });
 
 gulp.task('lint:js', function() {
-    return gulp.src([
-        './js/**/*.js',
-        '!./js/**/*.spec.js'
-    ])
-        .pipe(jshint({
-            esversion: 6
-        }))
-        .pipe(jshint.reporter(stylish));
+    return gulp.src(['src/**/*.js','!node_modules/**'])
+        .pipe(eslint())
+        .pipe(eslint.format())
+        .pipe(eslint.failAfterError());
 });
 
 // ==== TESTING ====

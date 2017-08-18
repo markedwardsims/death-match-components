@@ -7,7 +7,7 @@ test('should throw error if required parameters are not provided', t => {
     Base.prototype._requiredParams = [ 'foo' ];
 
     const error = t.throws(() => {
-        base = new Base({
+        new Base({
             bar: 'baz'
         });
     }, Error);
