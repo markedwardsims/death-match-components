@@ -1,6 +1,6 @@
 $transition: opacity 300ms ease-in-out;
 
-.notification-list {
+.dm-notification-list {
   @include media-breakpoint-up('lg') {
     position: fixed;
     right: 1rem;
@@ -10,7 +10,7 @@ $transition: opacity 300ms ease-in-out;
   }
 }
 
-.notification-list__item {
+.dm-notification-list__item {
   color: $white;
   font-size: 16px;
   list-style-type: none;
@@ -41,12 +41,12 @@ $transition: opacity 300ms ease-in-out;
   }
 }
 
-.notification-list__item--visible {
+.dm-notification-list__item--visible {
   opacity: 1;
   transition: $transition;
 }
 
-.notification-list__item--success {
+.dm-notification-list__item--success {
   background-color: $success-green;
 
   &:before {
@@ -54,7 +54,7 @@ $transition: opacity 300ms ease-in-out;
   }
 }
 
-.notification-list__item--warning {
+.dm-notification-list__item--warning {
   background-color: $warning-orange;
 
   &:before {
@@ -62,7 +62,7 @@ $transition: opacity 300ms ease-in-out;
   }
 }
 
-.notification-list__item--error {
+.dm-notification-list__item--error {
   background-color: $error-red;
 
   &:before {
@@ -70,7 +70,7 @@ $transition: opacity 300ms ease-in-out;
   }
 }
 
-.notification-list__item--chuck {
+.dm-notification-list__item--chuck {
   background-color: $chuck-grey;
 
   &:before {

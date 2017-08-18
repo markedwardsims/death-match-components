@@ -1,4 +1,4 @@
-.warrior-detail {
+.dm-warrior-detail {
   background-color: $medium-dark-grey;
   color: $white;
   font-size: 18px;
@@ -15,15 +15,15 @@
 
 }
 
-.warrior-detail__caption {
-  @extend %clearfix;
+.dm-warrior-detail__caption {
+  @extend %dm-clearfix;
 
   @include media-breakpoint-up('md') {
     padding-top: 14px;
   }
 }
 
-.warrior-detail__name {
+.dm-warrior-detail__name {
   font-style: italic;
 
   @include media-breakpoint-up('md') {
@@ -32,7 +32,7 @@
 
 }
 
-.warrior-detail__wins {
+.dm-warrior-detail__wins {
   @include media-breakpoint-up('md') {
     float: right;
   }

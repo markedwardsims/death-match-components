@@ -1,18 +1,18 @@
-.sidebar {
+.dm-sidebar {
   background-color: $almost-black;
   color: $white;
   float: left;
 }
 
-.sidebar__section {
+.dm-sidebar__section {
   padding: 1rem 1rem 0;
 }
 
-.sidebar__section--full-width {
+.dm-sidebar__section--full-width {
   padding-left: 0;
   padding-right: 0;
 }
 
-.sidebar__section:last-child {
+.dm-sidebar__section:last-child {
   padding-bottom: 1rem;
 }

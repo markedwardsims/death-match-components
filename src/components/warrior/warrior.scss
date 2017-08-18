@@ -1,4 +1,4 @@
-.warrior {
+.dm-warrior {
   @include background-transition;
   background-color: $light-grey;
   height: auto;
@@ -11,7 +11,7 @@
   
 }
 
-.warrior--small {
+.dm-warrior--small {
   height: $warrior-image-small;
   width: $warrior-image-small;
 }

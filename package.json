@@ -12,14 +12,12 @@
     ]
   },
   "babel": {
+    "presets": [
+      "@ava/stage-4"
+    ],
     "env": {
       "development": {
         "sourceMaps": "inline"
-      },
-      "test": {
-        "presets": [
-          "@ava/stage-4"
-        ]
       }
     }
   },
@@ -29,7 +27,7 @@
       "text"
     ],
     "exclude": [
-      "./test-helpers/setupBrowserEnv.js",
+      "**/test-helpers/*",
       "**/*.spec.*"
     ],
     "watermarks": {

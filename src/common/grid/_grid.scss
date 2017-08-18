@@ -15,7 +15,7 @@
 // Container widths
 // Set the container width, and override it for fixed navbars in media queries.
 @if $enable-grid-classes {
-  .container {
+  .dm-container {
     @include make-container();
     @include make-container-max-widths();
   }
@@ -25,7 +25,7 @@
 // Utilizes the mixin meant for fixed width containers, but without any defined
 // width for fluid, full width layouts.
 @if $enable-grid-classes {
-  .container-fluid {
+  .dm-container-fluid {
     @include make-container();
   }
 }
@@ -33,7 +33,7 @@
 // Row
 // Rows contain and clear the floats of your columns.
 @if $enable-grid-classes {
-  .row {
+  .dm-row {
     @include make-row();
   }
 }
@@ -46,7 +46,7 @@
 
 
 
-.row--no-gutter > [class*='col-'] {
+.dm-row--no-gutter > [class*='dm-col-'] {
   padding-left: 0;
   padding-right: 0;
 }
