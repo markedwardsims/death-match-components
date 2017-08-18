@@ -1,13 +1,13 @@
-.table {
+.dm-table {
   border-collapse: collapse;
   text-align: left;
 }
 
-.table__thead {
+.dm-table__thead {
   background-color: $medium-grey;
 }
 
-.table__row {
+.dm-table__row {
   @include background-transition;
   border-bottom: 1px solid $medium-light-grey;
 
@@ -22,7 +22,7 @@
 
 }
 
-.table__cell {
+.dm-table__cell {
   padding: ($gutter-size / 2);
 
   @include media-breakpoint-up('md') {
