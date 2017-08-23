@@ -1,4 +1,8 @@
-.dm-warriors__list-item {
+.dm-inline-list {
+  @extend %dm-clearfix;
+}
+
+.dm-inline-list__item {
   float: left;
   list-style-type: none;
   margin-bottom: $gutter-size;

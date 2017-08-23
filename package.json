@@ -74,7 +74,7 @@
     "browser-env": "^3.1.2",
     "event-stream": "^3.3.4",
     "fs": "0.0.2",
-    "glob": "^7.1.0",
+    "globby": "^6.1.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-ava": "^0.18.0",
@@ -94,6 +94,7 @@
     "nyc": "^11.1.0",
     "run-sequence": "^1.2.2",
     "sinon": "^2.0.0-pre",
+    "styledown": "^1.0.2",
     "webpack": "^1.13.2"
   },
   "dependencies": {
