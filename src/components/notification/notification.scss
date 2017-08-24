@@ -1,11 +1,14 @@
 .dm-notification-list {
   @include media-breakpoint-up('lg') {
-    // TODO: we should probably make the fixed position a modifier
+    width: $notification-width;
+  }
+}
+.dm-notification-list--fixed {
+  @include media-breakpoint-up('lg') {
     position: fixed;
     right: 1rem;
     top: 1rem;
-    width: $notification-width;
-    z-index: 1;  
+    z-index: 1;
   }
 }
 

@@ -1,9 +1,10 @@
-# Icons
+## Icons
 
 The only use of icons curretly in Deathmatch Components is the notifications, so we simply use 
 SVGs as background images.
 
-    @example
+
+```css
     .dm-my-chuck-icon-element {
         height: 40px;
         width: 40px;
@@ -27,7 +28,9 @@ SVGs as background images.
         width: 40px;
         background: url('#{$icon-directory}/icon-warning.svg') no-repeat top left;
     }
-    
+```
+
+    @example
     <div class="dm-my-chuck-icon-element"></div>
     <div class="dm-my-error-icon-element"></div>
     <div class="dm-my-success-icon-element"></div>

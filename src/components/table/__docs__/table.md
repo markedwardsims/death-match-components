@@ -1,11 +1,10 @@
-# Table
+## Table
 
 There is currently only a single table style in Deathmatch. This table is perfect for creating 
 the leaderboard.
 
-# on dark background
-
     @example
+    <link rel='stylesheet' href='../dist/components/table/table.css' />
     <table class="dm-table">
         <thead class="dm-table__thead">
             <tr class="dm-table__row">
@@ -30,6 +29,4 @@ the leaderboard.
     </table>
     
     
-# on light background
-
-TODO...
+TODO... light themed table

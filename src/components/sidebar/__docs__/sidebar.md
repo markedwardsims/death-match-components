@@ -1,11 +1,10 @@
-# Sidebar
+## Sidebar
 
 All good apps need a sidebar. The Deathmatch sidebar is a dark, almost black background with 
 white foreground by default. Styles are available for sidebar sections as well as full-width
 sections. The sidebar is positioned using a float left. 
 
-    @example
-    
+```css
     .dm-sidebar {
         width: 50%;
     }
@@ -14,7 +13,10 @@ sections. The sidebar is positioned using a float left.
         width: 50%;
         float: right
     }
-    
+```
+
+    @example
+    <link rel='stylesheet' href='../dist/components/sidebar/sidebar.css' />
     <div class="dm-sidebar">
         <div class="dm-sidebar__section">
             This is a sidebar section
