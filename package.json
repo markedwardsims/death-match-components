@@ -63,6 +63,7 @@
   },
   "homepage": "https://github.com/markedwardsims/death-match-components#readme",
   "devDependencies": {
+    "documarker": "https://github.com/markedwardsims/documarker.git",
     "@ava/babel-preset-stage-4": "^1.1.0",
     "ava": "^0.22.0",
     "babel-core": "^6.9.1",

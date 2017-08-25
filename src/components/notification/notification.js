@@ -5,8 +5,8 @@ import {baseClassName, visibleClassName, animationTime} from './config/notificat
  * @module src/components/notification/notification.js
  *
  * @signature `new Notification(params)`
- * @param {Object} params
- * @return {notification}
+ * @param {Object} params the parameters to add to the instance
+ * @return {notification} Notification instance
  */
 class Notification extends Base {
 
