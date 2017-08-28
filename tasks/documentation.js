@@ -3,7 +3,10 @@ const Documarker = require('documarker');
 
 const documarker = new Documarker({
     targetPattern: 'src/**/*.md',
-    indexPageTargetPattern: 'docsIndex.md'
+    indexPageTargetPattern: 'docsIndex.md',
+    globalCSS: [
+        'dist/common/deathmatch.common.css',
+    ]
 });
 
 gulp.task('documentation:copy:dist', function() {
@@ -15,4 +18,7 @@ gulp.task('documentation:build', function() {
     return documarker.build();
 });
 
-gulp.task('documentation', [ 'documentation:copy:dist', 'documentation:build' ]);
+gulp.task('documentation', [
+    'documentation:copy:dist',
+    'documentation:build'
+]);

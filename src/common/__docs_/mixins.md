@@ -1,11 +1,16 @@
-# SCSS Mixins
+---
+name: SCSS Mixins
+---
 
-## Background Color Transition
+## SCSS Mixins
+
+### Background Color Transition
 
 This mixin appplies a 0.25 second transition with the ease-in-out easy algorithm, to the `background-color` property.
 
-```css
+```scss
     .dm-my-background-transition-element {
+        @include background-transition;
         background-color: red;
         padding: 20px;
         color: #ffffff;
@@ -15,15 +20,14 @@ This mixin appplies a 0.25 second transition with the ease-in-out easy algorithm
         background-color: navy;
     }
 ```
-    @example
-    <div class="dm-my-background-transition-element">My background transition element</div>
     
-## Opacity Transition
+### Opacity Transition
 
 This mixin appplies a 0.3 second transition with the ease-in-out easy algorithm, to the `opacity` property.
 
-```css
+```scss
     .dm-my-opacity-transition-element {
+        @include background-transition;
         opacity: 1;
         background-color: red;
         padding: 20px;
@@ -34,7 +38,3 @@ This mixin appplies a 0.3 second transition with the ease-in-out easy algorithm,
         opacity: 0;
     }
 ```
-
-    @example
-    <div class="dm-my-opacity-transition-element">My opacity transition element</div>
-    

@@ -4,7 +4,7 @@
 }
 
 .dm-table__thead {
-  background-color: $medium-grey;
+  background-color: $light-grey;
 }
 
 .dm-table__row {
@@ -12,12 +12,12 @@
   border-bottom: 1px solid $medium-light-grey;
 
   &:nth-child(even) {
-    background-color: lighten($almost-black, 5%);
+    background-color: lighten($light-grey, 15%);
   }
 
   &:hover {
     @include background-transition;
-    background-color: lighten($almost-black, 20%);
+    background-color: lighten($light-grey, 10%);
   }
 
 }
@@ -29,4 +29,20 @@
     padding: ($gutter-size / 2) $gutter-size;
   }
 
+}
+
+.dm-table--dark {
+  color: $white;
+
+  .dm-table__thead {
+    background-color: $medium-grey;
+  }
+
+  .dm-table__row:nth-child(even) {
+    background-color: lighten($almost-black, 5%);
+  }
+
+  .dm-table__row:hover {
+    background-color: lighten($almost-black, 20%);
+  }
 }

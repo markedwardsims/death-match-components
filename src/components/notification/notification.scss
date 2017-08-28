@@ -3,6 +3,7 @@
     width: $notification-width;
   }
 }
+
 .dm-notification-list--fixed {
   @include media-breakpoint-up('lg') {
     position: fixed;

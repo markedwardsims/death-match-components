@@ -11,13 +11,20 @@ for warning, error, success, and of course Chuck.
 
     @example
     <div class="dm-notification-list">
-        <div class="dm-notification-list__item dm-notification-list__item--warning dm-notification-list__item--visible">Take it easy!</div>
-        <div class="dm-notification-list__item dm-notification-list__item--error dm-notification-list__item--visible">Error!</div>
-		<div class="dm-notification-list__item dm-notification-list__item--success dm-notification-list__item--visible">Great success!</div>
-		<div class="dm-notification-list__item dm-notification-list__item--chuck dm-notification-list__item--visible">Chuck always wins!</div>
+        <div class="dm-notification-list__item dm-notification-list__item--warning">Take it easy!</div>
+        <div class="dm-notification-list__item dm-notification-list__item--error">Error!</div>
+		<div class="dm-notification-list__item dm-notification-list__item--success">Great success!</div>
+		<div class="dm-notification-list__item dm-notification-list__item--chuck">Chuck always wins!</div>
     </div>
     
     <script>
-        console.log('hello world!');
+        document.querySelectorAll('.dm-notification-list__item').forEach(function(el){
+            new Notification({
+                el: el,
+                onAfterClick: function(e) {
+                    console.log(e);
+                }
+            });
+        });
     </script>
     

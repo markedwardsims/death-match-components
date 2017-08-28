@@ -8,7 +8,7 @@ import {baseClassName, visibleClassName, animationTime} from './config/notificat
  * @param {Object} params the parameters to add to the instance
  * @return {notification} Notification instance
  */
-class Notification extends Base {
+export class Notification extends Base {
 
     /**
      * The Notification constructor
