@@ -8,9 +8,10 @@ css:
 ## Warrior Detail
 
 The Warrior Detail component provides the collection of warrior information including 
-warrior image, name and number of wins. Notice the inclusion of the `dm-warrior` class 
-which makes use of the Warrior image component. The gutters are adjusted, and the name 
-and wins count are stacked when the viewport is less than the `md` grid breakpoint.
+[warrior image, name and number of wins. Notice the inclusion of the `dm-warrior` class 
+which makes use of the [Warrior image component](/warrior). The gutters are adjusted, and the name 
+and wins count are stacked when the viewport is less than the `md` grid breakpoint. The margins 
+are set to `auto` so the warrior detail will be centered horizontally within it's container.
 
     @example
     <figure class="dm-warrior-detail">

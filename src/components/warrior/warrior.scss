@@ -1,14 +1,14 @@
 .dm-warrior {
-  @include background-transition;
-  background-color: $light-grey;
+  @include opacity-transition;
   height: auto;
   width: 100%;
+  opacity: 1;
 
   &:hover {
-    @include background-transition;
-    background-color: darken($light-grey, 20%);
+    @include opacity-transition;
+    opacity: 0.75;
   }
-  
+
 }
 
 .dm-warrior--small {

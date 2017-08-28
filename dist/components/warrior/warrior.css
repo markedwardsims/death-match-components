@@ -1,1 +1,1 @@
-.dm-clearfix{overflow:hidden}.dm-warrior{transition:background-color .25s ease-in-out;background-color:#cfcfcf;height:auto;width:100%}.dm-warrior:hover{transition:background-color .25s ease-in-out;background-color:#9c9c9c}.dm-warrior--small{height:50px;width:50px}
+.dm-clearfix{overflow:hidden}.dm-warrior{transition:opacity 300ms ease-in-out;height:auto;width:100%;opacity:1}.dm-warrior:hover{transition:opacity 300ms ease-in-out;opacity:0.75}.dm-warrior--small{height:50px;width:50px}
