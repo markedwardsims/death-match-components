@@ -23,6 +23,11 @@ that the Deathmatch grid classes are all prefixed with `dm-`, so where Bootstrap
     <div class="dm-container">
       <div class="dm-row">
         <div class="dm-col-sm example-grid-element">
+          1 of 1
+        </div>
+      </div>
+      <div class="dm-row">
+        <div class="dm-col-sm example-grid-element">
           1 of 2
         </div>
         <div class="dm-col-sm example-grid-element">
