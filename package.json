@@ -1,6 +1,6 @@
 {
   "name": "deathmatch-components",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "A library of component to build Deathmatch apps with",
   "ava": {
     "files": [
