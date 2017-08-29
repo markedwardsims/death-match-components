@@ -1,5 +1,6 @@
 ---
 name: Warrior Detail
+group: Warriors
 css: 
  - dist/components/warriorDetail/warriorDetail.css
  - dist/components/warrior/warrior.css

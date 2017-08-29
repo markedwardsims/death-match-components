@@ -1,5 +1,6 @@
 ---
 name: Logo
+group: Common
 css: dist/components/logo/logo.css
 ---
 

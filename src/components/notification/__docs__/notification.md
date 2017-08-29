@@ -1,5 +1,6 @@
 ---
 name: Notification
+group: Common
 css: dist/components/notification/notification.css
 js: dist/components/notification/notification.js
 ---

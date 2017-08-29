@@ -1,5 +1,6 @@
 ---
 name: SCSS Mixins
+group: CSS
 ---
 
 ## SCSS Mixins

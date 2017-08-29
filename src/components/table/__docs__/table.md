@@ -1,5 +1,6 @@
 ---
 name: Table
+group: Common
 css: dist/components/table/table.css
 ---
 

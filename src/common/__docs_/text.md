@@ -1,5 +1,6 @@
 ---
 name: Text
+group: Common
 ---
 
 ## Text

@@ -1,5 +1,6 @@
 ---
 name: Sidebar
+group: Layout
 css: dist/components/sidebar/sidebar.css
 ---
 

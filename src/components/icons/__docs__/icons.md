@@ -1,5 +1,6 @@
 ---
 name: Icons
+group: Common
 ---
 
 ## Icons
