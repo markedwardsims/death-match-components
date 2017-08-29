@@ -1,5 +1,6 @@
 ---
 name: Inline List
+group: Common
 css: dist/components/inlineList/inlineList.css
 ---
 

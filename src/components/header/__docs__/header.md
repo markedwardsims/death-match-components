@@ -1,5 +1,6 @@
 ---
 name: Header
+group: Layout
 css: 
  - dist/components/logo/logo.css
  - dist/components/header/header.css

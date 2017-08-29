@@ -1,5 +1,6 @@
 ---
 name: Page
+group: Layout
 ---
 
 ## Page

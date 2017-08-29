@@ -1,5 +1,6 @@
 ---
 name: Grid
+group: Layout
 ---
 
 ## Grid
