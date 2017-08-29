@@ -1,7 +1,14 @@
 import Base from '../base/base.js';
 import {baseClassName, visibleClassName, animationTime} from './config/notification.js';
 
-class Notification extends Base {
+/**
+ * @module src/components/notification/notification.js
+ *
+ * @signature `new Notification(params)`
+ * @param {Object} params the parameters to add to the instance
+ * @return {notification} Notification instance
+ */
+export class Notification extends Base {
 
     /**
      * The Notification constructor

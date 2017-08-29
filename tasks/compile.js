@@ -1,6 +1,6 @@
 const gulp = require('gulp');
 const gutil = require('gulp-util');
-const glob = require("glob");
+const glob = require("globby");
 const uglify = require('gulp-uglify');
 const rename = require('gulp-rename');
 const webpack = require('webpack');
@@ -45,7 +45,7 @@ function compileJs(files, out, done) {
 }
 
 gulp.task('js:build', function(done) {
-    glob("./src/components/**/!(*.spec).js", {}, function(er, files) {
+    glob("./src/components/**/!(*.spec).js").then(function(files) {
         var filesHash = files.map(function(file, index) {
             // extract the name of the component by splitting the path, then trimming off the .js
             var name = file.split('/').splice(-1)[0].slice(0, -3);
@@ -58,6 +58,7 @@ gulp.task('js:build', function(done) {
         var flattenedFilesHash = Object.assign.apply(Object, filesHash);
         compileJs(flattenedFilesHash, {path: './dist/components'}, done);
     });
+
 });
 
 // ===== CSS =====

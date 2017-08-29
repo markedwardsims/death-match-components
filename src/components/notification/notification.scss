@@ -1,24 +1,27 @@
-$transition: opacity 300ms ease-in-out;
-
 .dm-notification-list {
+  @include media-breakpoint-up('lg') {
+    width: $notification-width;
+  }
+}
+
+.dm-notification-list--fixed {
   @include media-breakpoint-up('lg') {
     position: fixed;
     right: 1rem;
     top: 1rem;
-    width: $notification-width;
-    z-index: 1;  
+    z-index: 1;
   }
 }
 
 .dm-notification-list__item {
+  @include opacity-transition;
   color: $white;
   font-size: 16px;
   list-style-type: none;
   opacity: 0;
-  padding: 17px 13px;
+  padding: 17px 13px 17px 60px;
   position: relative;
   text-align: right;
-  transition: $transition;
 
   @include media-breakpoint-up('lg') {
     border-radius: 4px;
@@ -42,8 +45,8 @@ $transition: opacity 300ms ease-in-out;
 }
 
 .dm-notification-list__item--visible {
+  @include opacity-transition;
   opacity: 1;
-  transition: $transition;
 }
 
 .dm-notification-list__item--success {
