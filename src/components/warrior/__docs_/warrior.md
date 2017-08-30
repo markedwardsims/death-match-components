@@ -23,7 +23,7 @@ maintain a proper aspect ratio.
     </style>
     
     <div class="example-warrior-container">
-        <img class="dm-warrior" src="https://vignette4.wikia.nocookie.net/americangladiators/images/2/20/Nitro.jpg/revision/latest?cb=20120207050907">
+        <img class="dm-warrior" src="/dist/assets/images/nitro.jpg">
     </div>
     
     
@@ -32,4 +32,4 @@ maintain a proper aspect ratio.
 The thumbnail modifier creates an image that is 50px by 50px. 
 
     @example
-    <img class="dm-warrior dm-warrior--small" src="https://vignette4.wikia.nocookie.net/americangladiators/images/2/20/Nitro.jpg/revision/latest?cb=20120207050907">
+    <img class="dm-warrior dm-warrior--small" src="/dist/assets/images/nitro.jpg">

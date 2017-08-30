@@ -16,7 +16,7 @@ are set to `auto` so the warrior detail will be centered horizontally within it'
 
     @example
     <figure class="dm-warrior-detail">
-        <img class="dm-warrior" src="https://vignette4.wikia.nocookie.net/americangladiators/images/2/20/Nitro.jpg/revision/latest?cb=20120207050907">
+        <img class="dm-warrior" src="/dist/assets/images/nitro.jpg">
         <figcaption class="dm-warrior-detail__caption">
             <div class="dm-warrior-detail__name">Nitro</div>
             <div class="dm-warrior-detail__wins">0</div>
