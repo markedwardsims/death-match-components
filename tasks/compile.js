@@ -10,7 +10,6 @@ const autoprefixer = require('gulp-autoprefixer');
 const insert = require('gulp-insert');
 const es = require('event-stream');
 const gulpif = require('gulp-if');
-const copy = require('gulp-contrib-copy');
 const svgMin = require('gulp-svgmin');
 
 // ===== JAVASCRIPT =====
