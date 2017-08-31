@@ -1,8 +1,22 @@
 %dm-clearfix {
   overflow: hidden;
+
+  &::after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
 }
+
+* html .dm-clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .dm-clearfix { zoom: 1; } /* IE7 */
 
 .dm-clearfix {
   @extend %dm-clearfix;
 }
+
+
 
