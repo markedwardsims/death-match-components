@@ -1,1 +1,1 @@
-.dm-clearfix,.dm-inline-list{overflow:hidden}.dm-inline-list__item{float:left;list-style-type:none;margin-bottom:20px;margin-right:20px}
+.dm-clearfix,.dm-inline-list{overflow:hidden}.dm-clearfix::after,.dm-inline-list::after{visibility:hidden;display:block;font-size:0;content:" ";clear:both;height:0}* html .dm-clearfix{zoom:1}*:first-child+html .dm-clearfix{zoom:1}.dm-inline-list__item{float:left;list-style-type:none;margin-bottom:20px;margin-right:20px}
